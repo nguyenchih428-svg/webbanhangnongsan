@@ -1,0 +1,134 @@
+.banner-carousel {
+  position: relative;
+  width: 100%;
+  max-width: calc(100% - 0);
+  margin: 20px auto;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+.banner-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1200 / 350;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.banner-slide {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+}
+
+.banner-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.banner-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: fill;
+  object-position: center;
+}
+
+.banner-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.2);
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+}
+
+.banner-control:hover {
+  background-color: rgba(0, 0, 0, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.banner-control.prev {
+  left: 20px;
+}
+
+.banner-control.next {
+  right: 20px;
+}
+
+.banner-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.dot:hover {
+  background-color: #ffffff;
+}
+
+.dot.active {
+  background-color: #ffffff;
+  border-radius: 10px;
+}
+
+.dot:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .banner-carousel {
+    width: 95%;
+    border-radius: 12px;
+    margin: 15px auto 25px;
+  }
+
+  .banner-wrapper {
+    aspect-ratio: 16 / 9;
+  }
+
+  .banner-control {
+    width: 35px;
+    height: 35px;
+    font-size: 1.2rem;
+  }
+
+  .banner-dots {
+    bottom: 12px;
+  }
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "employeeId": "NV001",
+    "user": "admin@fruitshop.vn",
+    "password": "adminpassword",
+    "name": "Lê Minh Quản Trị",
+    "position": "Quản lý cửa hàng",
+    "role": "admin",
+    "phone": "0900000001",
+    "status": "Đang làm việc"
+  },
+  {
+    "id": 2,
+    "employeeId": "NV002",
+    "user": "banhang01@fruitshop.vn",
+    "password": "salespassword",
+    "name": "Nguyễn Thu Thủy",
+    "position": "Nhân viên bán hàng",
+    "role": "sales",
+    "phone": "0900000002",
+    "status": "Đang làm việc"
+  },
+  {
+    "id": 3,
+    "employeeId": "NV003",
+    "user": "kho01@fruitshop.vn",
+    "password": "warehousepassword",
+    "name": "Phạm Quốc Huy",
+    "position": "Nhân viên kho",
+    "role": "warehouse",
+    "phone": "0900000003",
+    "status": "Nghỉ phép"
+  }
+]

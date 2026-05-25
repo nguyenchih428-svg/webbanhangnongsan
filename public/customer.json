@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "user": "khachhang01@gmail.com",
+    "password": "password123",
+    "name": "Nguyễn Văn An",
+    "phone": "0901234567",
+    "address": "123 Đường Nông Lâm, Linh Trung, Thủ Đức",
+    "role": "customer",
+    "membership": "Gold",
+    "avatar": "/img/avatar1.png"
+  },
+  {
+    "id": 2,
+    "user": "tranb@gmail.com",
+    "password": "password456",
+    "name": "Trần Thị Bình",
+    "phone": "0987654321",
+    "address": "456 Lê Văn Việt, Quận 9, TP.HCM",
+    "role": "customer",
+    "membership": "Silver",
+    "avatar": "/img/avatar2.png"
+  },
+  {
+    "id": 3,
+    "user": "lecuong@gmail.com",
+    "password": "password789",
+    "name": "Lê Văn Cường",
+    "phone": "0912333444",
+    "address": "789 Kha Vạn Cân, Thủ Đức, TP.HCM",
+    "role": "customer",
+    "membership": "Bronze",
+    "avatar": "/img/avatar3.png"
+  }
+]

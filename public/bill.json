@@ -1,0 +1,50 @@
+[
+  {
+    "billId": "HD001",
+    "customerName": "Nguyễn Văn A",
+    "orderDate": "2026-04-18T10:30:00",
+    "phone": "0901234567",
+    "address": "123 Đường Nông Lâm, Thủ Đức, TP.HCM",
+    "items": [
+      {
+        "productId": 1,
+        "name": "Cải thìa sạch",
+        "selectedSize": "M",
+        "quantity": 2,
+        "price": 25000,
+        "subtotal": 50000
+      },
+      {
+        "productId": 11,
+        "name": "Táo Envy Mỹ",
+        "selectedSize": "L",
+        "quantity": 1,
+        "price": 120000,
+        "subtotal": 120000
+      }
+    ],
+    "totalAmount": 170000,
+    "paymentMethod": "COD",
+    "status": "Đang giao hàng"
+  },
+  {
+    "billId": "HD002",
+    "customerName": "Trần Thị B",
+    "orderDate": "2026-04-19T14:15:00",
+    "phone": "0987654321",
+    "address": "456 Đường Lê Văn Việt, Quận 9, TP.HCM",
+    "items": [
+      {
+        "productId": 22,
+        "name": "Thanh long đỏ",
+        "selectedSize": "S",
+        "quantity": 3,
+        "price": 35000,
+        "subtotal": 105000
+      }
+    ],
+    "totalAmount": 105000,
+    "paymentMethod": "Chuyển khoản",
+    "status": "Đã thanh toán"
+  }
+]

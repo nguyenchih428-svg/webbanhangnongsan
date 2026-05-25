@@ -1,0 +1,87 @@
+.about-wrap {
+  padding: 60px 20px;
+  background-color: #f8faf9;
+  font-family: sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Intro */
+.shop-intro {
+  text-align: center;
+  margin-bottom: 60px;
+}
+.shop-intro h2 {
+  color: #1a472a;
+  margin-bottom: 20px;
+}
+.intro-text {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #475569;
+  font-size: 1.2rem;
+}
+
+/* Mission */
+.mission-values {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: #1a472a;
+  color: white;
+  border-radius: 20px;
+  padding: 40px;
+  margin-bottom: 60px;
+}
+.mission-item {
+  text-align: center;
+  padding: 20px;
+}
+.mission-item h3 {
+  color: #fbbf24;
+  margin-bottom: 15px;
+}
+
+/* Reasons Grid */
+.why-choose-us > h3 {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #1a472a;
+}
+.reasons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.reason-card {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: 0.3s;
+}
+.reason-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+.icon-box {
+  font-size: 40px;
+  color: #22c55e;
+  margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .reasons-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .mission-values {
+    grid-template-columns: 1fr;
+  }
+  .reasons-grid {
+    grid-template-columns: 1fr;
+  }
+}

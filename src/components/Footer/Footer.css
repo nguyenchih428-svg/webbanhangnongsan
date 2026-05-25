@@ -1,0 +1,255 @@
+/* =========================================
+   FOOTER BASE
+   ========================================= */
+   .site-footer {
+    background: #1a3a28;
+    color: #d4edd9;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+  }
+
+  /* Dải xanh trang trí trên cùng */
+  .footer__strip {
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #27ae60, #1e8449);
+  }
+
+  /* =========================================
+     FOOTER CONTENT GRID
+     ========================================= */
+  .footer__body {
+    max-width: calc(100% - 2%);
+    margin: 0 auto;
+    padding: 48px 24px 40px;
+    display: grid;
+    grid-template-columns: 200px 1fr 260px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  /* =========================================
+     CỘT TRÁI — Logo + Bản quyền
+     ========================================= */
+  .footer__brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer__logo-img {
+    width: 100px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 6px;
+    display: block;
+    transition: transform 0.22s ease;
+  }
+
+  .footer__logo-img:hover {
+    transform: scale(1.05);
+  }
+
+  .footer__copy {
+    font-size: 12px;
+    color: #8fba9a;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* =========================================
+     CỘT GIỮA — Nhóm link điều hướng
+     ========================================= */
+  .footer__links-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .footer__col-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ffffff;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer__link-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer__link-list a {
+    color: #d4edd9;
+    text-decoration: none;
+    font-size: 13px;
+    opacity: 0.8;
+    transition: opacity 0.22s ease, color 0.22s ease, padding-left 0.22s ease;
+  }
+
+  .footer__link-list a:hover {
+    opacity: 1;
+    color: #f4c430;
+    padding-left: 4px;
+  }
+
+  /* =========================================
+     CỘT PHẢI — Social + Bản đồ
+     ========================================= */
+  .footer__right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .footer__social-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background 0.22s ease, transform 0.22s ease;
+  }
+
+  .footer__social-btn:hover {
+    background: #27ae60;
+    color: #ffffff;
+    transform: translateY(-3px);
+    border-color: transparent;
+  }
+
+  .footer__map-iframe {
+    display: block;
+    width: 100%;
+    height: 148px;
+    border: 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .footer__map-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: #f4c430;
+    text-decoration: none;
+    font-style: italic;
+  }
+
+  .footer__map-link:hover {
+    text-decoration: underline;
+  }
+
+  /* =========================================
+     BOTTOM BAR
+     ========================================= */
+  .footer__bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    text-align: center;
+    padding: 14px 24px;
+    font-size: 12px;
+    color: #8fba9a;
+  }
+
+  /* =========================================
+     NÚT CHAT FLOATING
+     ========================================= */
+  .chat-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 52px;
+    height: 52px;
+    background: #27ae60;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    text-decoration: none;
+    transition: transform 0.22s ease, background 0.22s ease;
+  }
+
+  .chat-float:hover {
+    background: #1e8449;
+    transform: scale(1.1);
+    color: #ffffff;
+  }
+
+  /* =========================================
+     RESPONSIVE — Tablet ≤ 1024px
+     ========================================= */
+  @media (max-width: 1024px) {
+    .footer__body {
+      grid-template-columns: 1fr;
+      gap: 36px;
+      text-align: center;
+    }
+
+    .footer__brand {
+      align-items: center;
+    }
+
+    .footer__right {
+      align-items: center;
+    }
+
+    .footer__social {
+      justify-content: center;
+    }
+
+    .footer__map-iframe {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  /* =========================================
+     RESPONSIVE — Mobile ≤ 768px
+     ========================================= */
+  @media (max-width: 768px) {
+    .footer__body {
+      padding: 36px 16px 28px;
+      gap: 28px;
+    }
+
+    .footer__links-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      text-align: left;
+    }
+
+    .chat-float {
+      width: 44px;
+      height: 44px;
+      bottom: 20px;
+      right: 20px;
+      font-size: 20px;
+    }
+  }

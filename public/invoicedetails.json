@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "billId": "HD001",
+    "productId": 11,
+    "productName": "Táo Envy Mỹ",
+    "quantity": 2,
+    "unitPrice": 120000,
+    "subtotal": 240000,
+    "selectedSize": "M"
+  },
+  {
+    "id": 2,
+    "billId": "HD001",
+    "productId": 5,
+    "productName": "Xoài Cát Hòa Lộc",
+    "quantity": 1,
+    "unitPrice": 85000,
+    "subtotal": 85000,
+    "selectedSize": "L"
+  },
+  {
+    "id": 3,
+    "billId": "HD002",
+    "productId": 22,
+    "productName": "Nho Mẫu Đơn",
+    "quantity": 1,
+    "unitPrice": 350000,
+    "subtotal": 350000,
+    "selectedSize": "M"
+  },
+  {
+    "id": 4,
+    "billId": "HD003",
+    "productId": 45,
+    "productName": "Dâu Tây Đà Lạt",
+    "quantity": 3,
+    "unitPrice": 150000,
+    "subtotal": 450000,
+    "selectedSize": "S"
+  },
+  {
+    "id": 5,
+    "billId": "HD003",
+    "productId": 30,
+    "productName": "Cam Vàng Úc",
+    "quantity": 2,
+    "unitPrice": 65000,
+    "subtotal": 130000,
+    "selectedSize": "L"
+  }
+]
