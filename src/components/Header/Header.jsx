@@ -180,10 +180,10 @@ const Header = () => {
             </Link>
 
             <div className="header-search" ref={searchBoxRef}>
-              <form className="header-search--form" onSubmit={handleSearchSubmit}>
-                <i className="bi bi-search header-search--icon" />
+              <form className="header-search-form" onSubmit={handleSearchSubmit}>
+                <i className="bi bi-search header-search-icon" />
                 <input
-                  className="header-search--input"
+                  className="header-search-input"
                   type="text"
                   placeholder="Tìm kiếm nông sản..."
                   value={q}
@@ -191,23 +191,23 @@ const Header = () => {
                   onFocus={() => setSearchFocused(true)}
                   autoComplete="off"
                 />
-                <button className="header-search--btn" type="submit">
+                <button className="header-search-btn" type="submit">
                   Tìm kiếm
                 </button>
               </form>
 
               {searchFocused && q.trim() && (
-                <ul className="header-search--dropdown">
+                <ul className="header-search-dropdown">
                   {searchMatches.length === 0 ? (
-                    <li className="header-search--empty">Không tìm thấy sản phẩm.</li>
+                    <li className="header-search-empty">Không tìm thấy sản phẩm.</li>
                   ) : (
                     searchMatches.map(p => (
                       <li key={p.id}>
-                        <button className="header-search--option" type="button" onClick={() => goToProduct(p)}>
-                          <img className="header-search--thumb" src={imageMap[p.imageKey] || "https://dummyimage.com/40x40/e8f8ef/27ae60&text=?"} alt={p.name} />
-                          <span className="header-search--meta">
-                            <span className="header-search--name">{p.name}</span>
-                            {p.currentPrice && <span className="header-search--price">{p.currentPrice}</span>}
+                        <button className="header-search-option" type="button" onClick={() => goToProduct(p)}>
+                          <img className="header-search-thumb" src={imageMap[p.imageKey] || "https://dummyimage.com/40x40/e8f8ef/27ae60&text=?"} alt={p.name} />
+                          <span className="header-search-meta">
+                            <span className="header-search-name">{p.name}</span>
+                            {p.price && <span className="header-search-price">{p.price.toLocaleString('vi-VN')}đ</span>}
                           </span>
                         </button>
                       </li>
@@ -220,16 +220,15 @@ const Header = () => {
             <div className="header-actions">
               <button className="cart-btn" onClick={() => navigate("/cart")}>
                 <i className="bi bi-cart3" />
-                {/* <span>Giỏ hàng</span> */}
                 <span className="cart-badge">{cartCount}</span>
               </button>
 
               <span className="action-sep">|</span>
 
               <div className="lang-switcher">
-                <span className="lang-switcher--active">VN</span>
-                <span className="lang-switcher--sep">|</span>
-                <span className="lang-switcher--opt">EN</span>
+                <span className="lang-switcher-active">VN</span>
+                <span className="lang-switcher-sep">|</span>
+                <span className="lang-switcher-opt">EN</span>
               </div>
 
               {currentUser ? (
@@ -237,13 +236,13 @@ const Header = () => {
                   <button className="user-btn" onClick={() => setUserMenuOpen(o => !o)}>
                     <i className="bi bi-person-circle" />
                     <span>{currentUser.name || currentUser.email || currentUser.user}</span>
-                    <i className={`bi bi-chevron-down user-btn--chevron${userMenuOpen ? " open" : ""}`} />
+                    <i className={`bi bi-chevron-down user-btn-chevron${userMenuOpen ? " open" : ""}`} />
                   </button>
 
                   {userMenuOpen && (
                     <div className="user-dropdown">
                       <button
-                        className="user-dropdown--item"
+                        className="user-dropdown-item"
                         onClick={() => {
                           setUserMenuOpen(false);
                           navigate("/profile");
@@ -254,7 +253,7 @@ const Header = () => {
 
                       {["admin"].includes(currentUser.role) && (
                         <button
-                          className="user-dropdown--item"
+                          className="user-dropdown-item"
                           onClick={() => {
                             setUserMenuOpen(false);
                             navigate("/admin");
@@ -264,7 +263,7 @@ const Header = () => {
                         </button>
                       )}
 
-                      <button className="user-dropdown--item user-dropdown--item--logout" onClick={handleLogout}>
+                      <button className="user-dropdown-item user-dropdown-item-logout" onClick={handleLogout}>
                         Đăng xuất
                       </button>
                     </div>
@@ -281,22 +280,22 @@ const Header = () => {
         </div>
 
         <nav className="header-nav">
-          <div className="header-nav--inner">
+          <div className="header-nav-inner">
             <ul className="nav-list">
-              <li className="nav-list--item">
-                <Link className={`nav-list--link${isActive("/") ? " nav-list--link--active" : ""}`} to="/">
+              <li className="nav-list-item">
+                <Link className={`nav-list-link${isActive("/") ? " nav-list-link-active" : ""}`} to="/">
                   Trang chủ
                 </Link>
               </li>
 
-              <li className="nav-list--item nav-list--item--has-sub">
-                <Link className={`nav-list--link${isActive("/rau-cu") ? " nav-list--link--active" : ""}`} to="/rau-cu">
+              <li className="nav-list-item nav-list-item-has-sub">
+                <Link className={`nav-list-link${isActive("/rau-cu") ? " nav-list-link-active" : ""}`} to="/rau-cu">
                   Rau củ
                 </Link>
                 <ul className="nav-sub">
                   {rauCuItems.map(i => (
                     <li key={i.href}>
-                      <Link className="nav-sub--link" to={i.href}>
+                      <Link className="nav-sub-link" to={i.href}>
                         {i.label}
                       </Link>
                     </li>
@@ -304,14 +303,14 @@ const Header = () => {
                 </ul>
               </li>
 
-              <li className="nav-list--item nav-list--item--has-sub">
-                <Link className={`nav-list--link${isActive("/trai-cay") ? " nav-list--link--active" : ""}`} to="/trai-cay">
+              <li className="nav-list-item nav-list-item-has-sub">
+                <Link className={`nav-list-link${isActive("/trai-cay") ? " nav-list-link-active" : ""}`} to="/trai-cay">
                   Trái cây
                 </Link>
                 <ul className="nav-sub">
                   {traiCayItems.map(i => (
                     <li key={i.href}>
-                      <Link className="nav-sub--link" to={i.href}>
+                      <Link className="nav-sub-link" to={i.href}>
                         {i.label}
                       </Link>
                     </li>
@@ -319,19 +318,19 @@ const Header = () => {
                 </ul>
               </li>
 
-              <li className="nav-list--item">
-                <Link className={`nav-list--link${isActive("/about") ? " nav-list--link--active" : ""}`} to="/about">
+              <li className="nav-list-item">
+                <Link className={`nav-list-link${isActive("/about") ? " nav-list-link-active" : ""}`} to="/about">
                   Giới thiệu
                 </Link>
               </li>
 
-              <li className="nav-list--item">
-                <Link className={`nav-list--link${isActive("/contact") ? " nav-list--link--active" : ""}`} to="/contact">
+              <li className="nav-list-item">
+                <Link className={`nav-list-link${isActive("/contact") ? " nav-list-link-active" : ""}`} to="/contact">
                   Liên hệ
                 </Link>
               </li>
-              <li className="nav-list--item">
-                <Link className={`nav-list--link${isActive("/news") ? " nav-list--link--active" : ""}`} to="/news">
+              <li className="nav-list-item">
+                <Link className={`nav-list-link${isActive("/news") ? " nav-list-link-active" : ""}`} to="/news">
                   Tin tức
                 </Link>
               </li>

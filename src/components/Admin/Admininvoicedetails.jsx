@@ -365,7 +365,7 @@ function Admininvoicedetails({ embedded = false }) {
               <tbody>
                 {displayedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="admin-table__empty">
+                    <td colSpan={7} className="admin-table-empty">
                       {appliedSearch.trim()
                         ? 'Không tìm thấy hóa đơn.'
                         : 'Chưa có chi tiết hóa đơn.'}
@@ -390,10 +390,10 @@ function Admininvoicedetails({ embedded = false }) {
                             </span>
                           </td>
                           <td>
-                            <div className="admin-table__actions">
+                            <div className="admin-table-actions">
                               <button
                                 type="button"
-                                className="admin-table__link"
+                                className="admin-table-link"
                                 onClick={() =>
                                   setExpandedBill(isOpen ? null : inv.billId)
                                 }
@@ -403,7 +403,7 @@ function Admininvoicedetails({ embedded = false }) {
                               </button>
                               <button
                                 type="button"
-                                className="admin-table__link"
+                                className="admin-table-link"
                                 onClick={() => openEdit(inv)}
                                 disabled={saving}
                               >
@@ -411,7 +411,7 @@ function Admininvoicedetails({ embedded = false }) {
                               </button>
                               <button
                                 type="button"
-                                className="admin-table__link admin-table__link--danger"
+                                className="admin-table-link admin-table-link--danger"
                                 onClick={() => handleDelete(inv.billId)}
                                 disabled={saving}
                               >
@@ -421,7 +421,7 @@ function Admininvoicedetails({ embedded = false }) {
                           </td>
                         </tr>
                         {isOpen && (
-                          <tr className="admin-table__detail-row">
+                          <tr className="admin-table-detail-row">
                             <td colSpan={7}>
                               <table className="admin-table admin-table--nested">
                                 <thead>
@@ -492,7 +492,7 @@ function Admininvoicedetails({ embedded = false }) {
                 onChange={(e) => handleFormChange('phone', e.target.value)}
               />
             </label>
-            <label className="admin-form-grid__full">
+            <label className="admin-form-grid-full">
               Địa chỉ
               <input
                 value={form.address}
@@ -587,7 +587,7 @@ function Admininvoicedetails({ embedded = false }) {
               {form.items.length > 1 && (
                 <button
                   type="button"
-                  className="admin-btn admin-btn--danger admin-btn--sm admin-item-row__remove"
+                  className="admin-btn admin-btn--danger admin-btn--sm admin-item-row-remove"
                   onClick={() => removeItemRow(index)}
                 >
                   Xóa dòng

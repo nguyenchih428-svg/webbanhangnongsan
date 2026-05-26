@@ -11,12 +11,12 @@
 }
 
 .pc:hover {
-  box-shadow: 0 12px 28px rgba(39, 174, 96, 0.12);
+  box-shadow: 0 12px 28px rgba(21, 128, 61, 0.12);
   transform: translateY(-4px);
-  border-color: #27ae60;
+  border-color: var(--color-primary);
 }
 
-.pc__badge {
+.pc-badge {
   position: absolute;
   top: 12px;
   left: 12px;
@@ -31,7 +31,7 @@
   letter-spacing: 0.3px;
 }
 
-.pc__img-wrap {
+.pc-img-wrap {
   padding: 20px;
   background: #f8fafc;
   display: flex;
@@ -41,7 +41,7 @@
   overflow: hidden;
 }
 
-.pc__img {
+.pc-img {
   width: 100%;
   max-width: 180px;
   height: 150px;
@@ -49,18 +49,18 @@
   transition: transform 0.35s ease;
 }
 
-.pc:hover .pc__img {
+.pc:hover .pc-img {
   transform: scale(1.08);
 }
 
-.pc__body {
+.pc-body {
   padding: 16px;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.pc__name {
+.pc-name {
   font-size: 15px;
   font-weight: 800;
   color: #0f172a;
@@ -73,26 +73,26 @@
   -webkit-box-orient: vertical;
 }
 
-.pc__sizes {
+.pc-sizes {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
 }
 
-.pc__size-label {
+.pc-size-label {
   font-size: 12px;
   color: #64748b;
   font-weight: 500;
 }
 
-.pc__size-tags {
+.pc-size-tags {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
 }
 
-.pc__size-tag {
+.pc-size-tag {
   background: #f1f5f9;
   color: #334155;
   padding: 3px 8px;
@@ -101,27 +101,27 @@
   font-weight: 700;
 }
 
-.pc__pricing {
+.pc-pricing {
   display: flex;
   align-items: baseline;
   gap: 10px;
   margin-bottom: 12px;
 }
 
-.pc__price {
+.pc-price {
   font-size: 18px;
   font-weight: 800;
   color: #ef4444;
 }
 
-.pc__price-old {
+.pc-price-old {
   font-size: 13px;
   color: #94a3b8;
   text-decoration: line-through;
   font-weight: 500;
 }
 
-.pc__meta {
+.pc-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -132,19 +132,19 @@
   font-weight: 500;
 }
 
-.pc__rating i {
-  color: #fbbf24;
+.pc-rating i {
+  color: var(--color-accent);
   font-size: 12px;
 }
 
-.pc__actions {
+.pc-actions {
   display: flex;
   gap: 10px;
 }
 
-.pc__btn-buy {
+.pc-btn-buy {
   flex: 1;
-  background: #27ae60;
+  background: var(--color-primary);
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -155,27 +155,27 @@
   transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.pc__btn-buy:hover {
-  background: #1e8449;
+.pc-btn-buy:hover {
+  background: var(--color-primary-dark);
   transform: translateY(-1px);
 }
 
-.pc__btn-buy:active {
+.pc-btn-buy:active {
   transform: translateY(1px);
 }
 
-.pc__btn-buy:disabled {
+.pc-btn-buy:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
 }
 
-.pc__btn-cart {
+.pc-btn-cart {
   width: 44px;
   height: 44px;
-  background: #f0fdf4;
-  color: #27ae60;
-  border: 1.5px solid #27ae60;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  border: 1.5px solid var(--color-primary);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -186,13 +186,13 @@
   transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
 }
 
-.pc__btn-cart:hover {
-  background: #27ae60;
+.pc-btn-cart:hover {
+  background: var(--color-primary);
   color: #ffffff;
   transform: translateY(-1px);
 }
 
-.pc__btn-cart:active {
+.pc-btn-cart:active {
   transform: translateY(1px);
 }
 
@@ -201,12 +201,12 @@
     border-radius: 14px;
   }
 
-  .pc__img-wrap {
+  .pc-img-wrap {
     min-height: 160px;
     padding: 16px;
   }
 
-  .pc__img {
+  .pc-img {
     height: 130px;
   }
 }
@@ -216,35 +216,35 @@
     border-radius: 12px;
   }
 
-  .pc__img-wrap {
+  .pc-img-wrap {
     min-height: 140px;
     padding: 12px;
   }
 
-  .pc__img {
+  .pc-img {
     height: 120px;
   }
 
-  .pc__body {
+  .pc-body {
     padding: 12px;
   }
 
-  .pc__name {
+  .pc-name {
     font-size: 14px;
     height: 38px;
   }
 
-  .pc__price {
+  .pc-price {
     font-size: 16px;
   }
 
-  .pc__btn-buy {
+  .pc-btn-buy {
     font-size: 13px;
     padding: 8px;
     border-radius: 8px;
   }
 
-  .pc__btn-cart {
+  .pc-btn-cart {
     width: 38px;
     height: 38px;
     font-size: 15px;
@@ -253,28 +253,28 @@
 }
 
 @media (max-width: 380px) {
-  .pc__img-wrap {
+  .pc-img-wrap {
     min-height: 120px;
   }
 
-  .pc__img {
+  .pc-img {
     height: 100px;
   }
 
-  .pc__name {
+  .pc-name {
     font-size: 13px;
   }
 
-  .pc__actions {
+  .pc-actions {
     gap: 8px;
   }
 
-  .pc__btn-buy {
+  .pc-btn-buy {
     padding: 7px 8px;
     font-size: 12px;
   }
 
-  .pc__btn-cart {
+  .pc-btn-cart {
     width: 34px;
     height: 34px;
     font-size: 14px;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Cart.css';
+
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const navigate = useNavigate();
@@ -76,6 +77,7 @@ const Cart = () => {
       return total + price * (item.quantity || 1);
     }, 0);
   };
+
   const handleCheckout = () => {
     navigate("/");
   };
@@ -99,7 +101,6 @@ const Cart = () => {
       <h2 className="cart-title">Giỏ hàng của bạn</h2>
 
       <div className="cart-content">
-        {/* LEFT: CART ITEMS */}
         <div className="cart-items">
           {cartItems.map((item) => {
             const uniqueKey = item.cartId || item.id;
@@ -136,7 +137,6 @@ const Cart = () => {
           })}
         </div>
 
-        {/* RIGHT: SUMMARY */}
         <div className="cart-summary">
           <h4 className="summary-title">Hóa đơn</h4>
 

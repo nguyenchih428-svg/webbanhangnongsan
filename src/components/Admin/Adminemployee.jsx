@@ -241,7 +241,7 @@ function Adminemployee({ embedded = false }) {
               <tbody>
                 {displayedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={6} className="admin-table__empty">
+                    <td colSpan={6} className="admin-table-empty">
                       {appliedSearch.trim()
                         ? 'Không tìm thấy nhân viên.'
                         : 'Chưa có nhân viên.'}
@@ -256,10 +256,10 @@ function Adminemployee({ embedded = false }) {
                       <td>{r.phone}</td>
                       <td>{r.email}</td>
                       <td>
-                        <div className="admin-table__actions">
+                        <div className="admin-table-actions">
                           <button
                             type="button"
-                            className="admin-table__link"
+                            className="admin-table-link"
                             onClick={() => openEdit(r)}
                             disabled={saving}
                           >
@@ -267,7 +267,7 @@ function Adminemployee({ embedded = false }) {
                           </button>
                           <button
                             type="button"
-                            className="admin-table__link admin-table__link--danger"
+                            className="admin-table-link admin-table-link--danger"
                             onClick={() => handleDelete(r.id)}
                             disabled={saving}
                           >
@@ -313,7 +313,7 @@ function Adminemployee({ embedded = false }) {
                 onChange={(e) => handleFormChange('phone', e.target.value)}
               />
             </label>
-            <label className="admin-form-grid__full">
+            <label className="admin-form-grid-full">
               Email
               <input
                 type="email"

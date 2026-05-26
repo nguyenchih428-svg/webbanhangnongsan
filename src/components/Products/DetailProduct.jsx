@@ -13,6 +13,13 @@ const DetailProduct = () => {
   const [error, setError] = useState(null);
   const [selectedSize, setSelectedSize] = useState('M');
 
+  const parsePrice = (price) => {
+    if (typeof price === 'number') return price;
+    if (!price) return 0;
+    const numericString = price.toString().replace(/[^\d]/g, '');
+    return numericString ? Number(numericString) : 0;
+  };
+
   useEffect(() => {
     setIsLoading(true);
     setError(null);
@@ -106,6 +113,10 @@ const DetailProduct = () => {
   if (error) return <div className="detail-error text-center py-5 text-danger">Lỗi: {error}</div>;
   if (!product) return null;
 
+  const calculatedDiscount = product.oldPrice && product.price && product.oldPrice > product.price
+    ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) + '%'
+    : null;
+
   return (
     <div className="detail-container">
       <div className="detail-nav-header">
@@ -124,7 +135,7 @@ const DetailProduct = () => {
               src={product.image || 'https://via.placeholder.com/500x500'}
               alt={product.name}
             />
-            {product.discount && <span className="detail-badge-sale">{product.discount}</span>}
+            {calculatedDiscount && <span className="detail-badge-sale">-{calculatedDiscount}</span>}
           </div>
         </div>
 
@@ -134,11 +145,14 @@ const DetailProduct = () => {
           <div className="product-meta">
             <span className="rating"><i className="bi bi-star-fill"></i> {product.rating || '5.0'}</span>
             <span className="divider">|</span>
-            <span className="sold">Đã bán {product.sold || 0}</span>
+            <span className="sold">Đã bán {product.sold || (product.id * 3 + 12)}</span>
           </div>
 
           <div className="product-price-box">
-            <span className="price-current">{Number(product.price).toLocaleString('vi-VN')}đ</span>
+            <span className="price-current">{parsePrice(product.price).toLocaleString('vi-VN')}đ</span>
+            {product.oldPrice && (
+              <span className="price-original">{parsePrice(product.oldPrice).toLocaleString('vi-VN')}đ</span>
+            )}
           </div>
 
           <div className="product-description">

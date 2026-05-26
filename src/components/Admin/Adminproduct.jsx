@@ -280,7 +280,7 @@ function Adminproduct({ embedded = false }) {
               <tbody>
                 {displayedProducts.length === 0 ? (
                   <tr>
-                    <td colSpan={7} className="admin-table__empty">
+                    <td colSpan={7} className="admin-table-empty">
                       {appliedSearch.trim()
                         ? 'Không tìm thấy sản phẩm.'
                         : 'Chưa có sản phẩm.'}
@@ -302,10 +302,10 @@ function Adminproduct({ embedded = false }) {
                       </td>
                       <td>{categoryMap[p.idcategory] || p.idcategory}</td>
                       <td>
-                        <div className="admin-table__actions">
+                        <div className="admin-table-actions">
                           <button
                             type="button"
-                            className="admin-table__link"
+                            className="admin-table-link"
                             onClick={() => openEdit(p)}
                             disabled={saving}
                           >
@@ -313,7 +313,7 @@ function Adminproduct({ embedded = false }) {
                           </button>
                           <button
                             type="button"
-                            className="admin-table__link admin-table__link--danger"
+                            className="admin-table-link admin-table-link--danger"
                             onClick={() => handleDelete(p.id)}
                             disabled={saving}
                           >

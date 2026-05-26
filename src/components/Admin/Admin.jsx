@@ -312,20 +312,20 @@ const Admin = () => {
       />
 
       <aside className={`ruang-sidebar ${mobileSidebarOpen ? 'is-open' : ''}`}>
-        <div className="ruang-sidebar__brand">
-          <span className="ruang-sidebar__brand-icon">
+        <div className="ruang-sidebar-brand">
+          <span className="ruang-sidebar-brand-icon">
             <i className="bi bi-flower2" />
           </span>
-          <span>Leaf Fruit</span>
+          <span>Tươi</span>
         </div>
-        <hr className="ruang-sidebar__divider" />
-        <div className="ruang-sidebar__heading">Quản lý</div>
-        <ul className="ruang-sidebar__nav">
+        <hr className="ruang-sidebar-divider" />
+        <div className="ruang-sidebar-heading">Quản lý</div>
+        <ul className="ruang-sidebar-nav">
           {Object.entries(SECTION_LABEL).map(([key, label]) => (
             <li key={key}>
               <button
                 type="button"
-                className={`ruang-sidebar__link ${adminSection === key ? 'is-active' : ''}`}
+                className={`ruang-sidebar-link ${adminSection === key ? 'is-active' : ''}`}
                   onClick={() => {
                     setAdminSection(key);
                     navigate(SECTION_TO_PATH[key] || '/Admin');
@@ -344,7 +344,7 @@ const Admin = () => {
         <header className="ruang-topbar">
           <button
             type="button"
-            className="ruang-topbar__toggle"
+            className="ruang-topbar-toggle"
             onClick={() => setMobileSidebarOpen((v) => !v)}
             aria-label="Mở menu"
           >
@@ -353,19 +353,19 @@ const Admin = () => {
           <div className="ruang-breadcrumb-wrap">
             <h1 className="ruang-heading">{sectionTitle}</h1>
           </div>
-          <div className="ruang-topbar__right">
+          <div className="ruang-topbar-right">
             <div className="ruang-user" ref={userMenuRef}>
               <button
                 type="button"
-                className="ruang-user__toggle"
+                className="ruang-user-toggle"
                 onClick={() => setUserMenuOpen((v) => !v)}
               >
-                <span className="ruang-user__avatar">{staffInitials}</span>
-                <span className="ruang-user__name">{staffDisplayName}</span>
+                <span className="ruang-user-avatar">{staffInitials}</span>
+                <span className="ruang-user-name">{staffDisplayName}</span>
               </button>
               {userMenuOpen && (
-                <div className="ruang-user__menu">
-                  <div className="ruang-user__menu-title">Tài khoản</div>
+                <div className="ruang-user-menu">
+                  <div className="ruang-user-menu-title">Tài khoản</div>
                   <button type="button" onClick={goHome}>
                     <i className="bi bi-house" /> Trang chủ
                   </button>
@@ -409,58 +409,58 @@ const Admin = () => {
                 <div className="admin-dashboard">
                   <div className="ruang-cards">
                     <div className="ruang-stat-card">
-                      <div className="ruang-stat-card__body">
-                        <div className="ruang-stat-card__label">Doanh thu</div>
-                        <div className="ruang-stat-card__value">
+                      <div className="ruang-stat-card-body">
+                        <div className="ruang-stat-card-label">Doanh thu</div>
+                        <div className="ruang-stat-card-value">
                           {fmtCurrency(stats.revenue)}
                         </div>
-                        <span className="ruang-stat-card__badge">
+                        <span className="ruang-stat-card-badge">
                           {fmtNumber(stats.billCount)} hóa đơn
                         </span>
                       </div>
-                      <span className="ruang-stat-card__icon">
+                      <span className="ruang-stat-card-icon">
                         <i className="bi bi-cash-coin" />
                       </span>
                     </div>
                     <div className="ruang-stat-card ruang-stat-card--green">
-                      <div className="ruang-stat-card__body">
-                        <div className="ruang-stat-card__label">Sản phẩm</div>
-                        <div className="ruang-stat-card__value">
+                      <div className="ruang-stat-card-body">
+                        <div className="ruang-stat-card-label">Sản phẩm</div>
+                        <div className="ruang-stat-card-value">
                           {fmtNumber(stats.total)}
                         </div>
-                        <span className="ruang-stat-card__badge ruang-stat-card__badge--muted">
+                        <span className="ruang-stat-card-badge ruang-stat-card-badge--muted">
                           {fmtNumber(stats.catCount)} danh mục
                         </span>
                       </div>
-                      <span className="ruang-stat-card__icon">
+                      <span className="ruang-stat-card-icon">
                         <i className="bi bi-box-seam" />
                       </span>
                     </div>
                     <div className="ruang-stat-card ruang-stat-card--cyan">
-                      <div className="ruang-stat-card__body">
-                        <div className="ruang-stat-card__label">Khách hàng</div>
-                        <div className="ruang-stat-card__value">
+                      <div className="ruang-stat-card-body">
+                        <div className="ruang-stat-card-label">Khách hàng</div>
+                        <div className="ruang-stat-card-value">
                           {fmtNumber(customers.length)}
                         </div>
-                        <span className="ruang-stat-card__badge ruang-stat-card__badge--muted">
+                        <span className="ruang-stat-card-badge ruang-stat-card-badge--muted">
                           {fmtNumber(employees.length)} nhân viên
                         </span>
                       </div>
-                      <span className="ruang-stat-card__icon">
+                      <span className="ruang-stat-card-icon">
                         <i className="bi bi-people" />
                       </span>
                     </div>
                     <div className="ruang-stat-card ruang-stat-card--amber">
-                      <div className="ruang-stat-card__body">
-                        <div className="ruang-stat-card__label">Đã bán</div>
-                        <div className="ruang-stat-card__value">
+                      <div className="ruang-stat-card-body">
+                        <div className="ruang-stat-card-label">Đã bán</div>
+                        <div className="ruang-stat-card-value">
                           {fmtNumber(stats.soldSum)}
                         </div>
-                        <span className="ruang-stat-card__badge">
+                        <span className="ruang-stat-card-badge">
                           TB {fmtCurrency(stats.avgBill)}/đơn
                         </span>
                       </div>
-                      <span className="ruang-stat-card__icon">
+                      <span className="ruang-stat-card-icon">
                         <i className="bi bi-cart3" />
                       </span>
                     </div>
@@ -468,7 +468,7 @@ const Admin = () => {
 
                   <div className="ruang-dashboard-grid">
                     <div className="ruang-card">
-                      <div className="ruang-card__title-bar">
+                      <div className="ruang-card-title-bar">
                         <h6>Hóa đơn gần đây</h6>
                       </div>
                       <div className="admin-table-wrap">
@@ -485,7 +485,7 @@ const Admin = () => {
                           <tbody>
                             {recentBills.length === 0 ? (
                               <tr>
-                                <td colSpan={5} className="admin-table__empty">
+                                <td colSpan={5} className="admin-table-empty">
                                   Chưa có hóa đơn
                                 </td>
                               </tr>
@@ -515,7 +515,7 @@ const Admin = () => {
                     </div>
 
                     <div className="ruang-card">
-                      <div className="ruang-card__title-bar">
+                      <div className="ruang-card-title-bar">
                         <h6>Hóa đơn doanh thu cao</h6>
                       </div>
                       <div className="admin-table-wrap">
@@ -531,7 +531,7 @@ const Admin = () => {
                           <tbody>
                             {topRevenueBills.length === 0 ? (
                               <tr>
-                                <td colSpan={4} className="admin-table__empty">
+                                <td colSpan={4} className="admin-table-empty">
                                   Chưa có dữ liệu
                                 </td>
                               </tr>
@@ -562,7 +562,7 @@ const Admin = () => {
 
                   <div className="ruang-bottom-grid">
                     <div className="ruang-card">
-                      <div className="ruang-card__title-bar">
+                      <div className="ruang-card-title-bar">
                         <h6>Sản phẩm bán chạy</h6>
                       </div>
                       <div className="admin-table-wrap">
@@ -577,7 +577,7 @@ const Admin = () => {
                           <tbody>
                             {topProducts.length === 0 ? (
                               <tr>
-                                <td colSpan={3} className="admin-table__empty">
+                                <td colSpan={3} className="admin-table-empty">
                                   Chưa có dữ liệu bán
                                 </td>
                               </tr>
@@ -596,7 +596,7 @@ const Admin = () => {
                     </div>
 
                     <div className="ruang-card">
-                      <div className="ruang-card__title-bar">
+                      <div className="ruang-card-title-bar">
                         <h6>Khách hàng tiêu biểu</h6>
                       </div>
                       <div className="admin-table-wrap">
@@ -612,7 +612,7 @@ const Admin = () => {
                           <tbody>
                             {topCustomers.length === 0 ? (
                               <tr>
-                                <td colSpan={4} className="admin-table__empty">
+                                <td colSpan={4} className="admin-table-empty">
                                   Chưa có khách hàng
                                 </td>
                               </tr>
@@ -643,31 +643,31 @@ const Admin = () => {
       {logoutModalOpen && (
         <div className="ruang-modal-backdrop" role="dialog" aria-modal="true">
           <div className="ruang-modal">
-            <div className="ruang-modal__header">
+            <div className="ruang-modal-header">
               <h5>Đăng xuất</h5>
               <button
                 type="button"
-                className="ruang-modal__close"
+                className="ruang-modal-close"
                 onClick={() => setLogoutModalOpen(false)}
                 aria-label="Đóng"
               >
                 ×
               </button>
             </div>
-            <div className="ruang-modal__body">
+            <div className="ruang-modal-body">
               Bạn có chắc muốn đăng xuất khỏi trang quản trị?
             </div>
-            <div className="ruang-modal__footer">
+            <div className="ruang-modal-footer">
               <button
                 type="button"
-                className="ruang-modal__btn"
+                className="ruang-modal-btn"
                 onClick={() => setLogoutModalOpen(false)}
               >
                 Hủy
               </button>
               <button
                 type="button"
-                className="ruang-modal__btn ruang-modal__btn--danger"
+                className="ruang-modal-btn ruang-modal-btn--danger"
                 onClick={logout}
               >
                 Đăng xuất

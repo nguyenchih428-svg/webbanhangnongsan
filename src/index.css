@@ -2,8 +2,10 @@
   --radius-sm: 2px;
   --radius: 4px;
   --radius-md: 6px;
-  --color-primary: #2e7d32;
-  --color-primary-dark: #256829;
+  --color-primary: #15803d;
+  --color-primary-dark: #166534;
+  --color-primary-light: #f0fdf4;
+  --color-accent: #eab308;
   --color-bg: #f6f7f6;
   --color-surface: #fff;
   --color-text: #444;

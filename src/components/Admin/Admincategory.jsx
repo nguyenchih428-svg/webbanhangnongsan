@@ -228,7 +228,7 @@ function Admincategory({ embedded = false }) {
               <tbody>
                 {displayedRows.length === 0 ? (
                   <tr>
-                    <td colSpan={3} className="admin-table__empty">
+                    <td colSpan={3} className="admin-table-empty">
                       {appliedSearch.trim()
                         ? 'Không tìm thấy danh mục.'
                         : 'Chưa có danh mục.'}
@@ -240,10 +240,10 @@ function Admincategory({ embedded = false }) {
                       <td>{r.id}</td>
                       <td>{r.name}</td>
                       <td>
-                        <div className="admin-table__actions">
+                        <div className="admin-table-actions">
                           <button
                             type="button"
-                            className="admin-table__link"
+                            className="admin-table-link"
                             onClick={() => openEdit(r)}
                             disabled={saving}
                           >
@@ -251,7 +251,7 @@ function Admincategory({ embedded = false }) {
                           </button>
                           <button
                             type="button"
-                            className="admin-table__link admin-table__link--danger"
+                            className="admin-table-link admin-table-link--danger"
                             onClick={() => handleDelete(r.id)}
                             disabled={saving}
                           >
@@ -276,7 +276,7 @@ function Admincategory({ embedded = false }) {
                 <input value={form.id} readOnly disabled />
               </label>
             )}
-            <label className="admin-form-grid__full">
+            <label className="admin-form-grid-full">
               Tên danh mục (*)
               <input
                 value={form.name}

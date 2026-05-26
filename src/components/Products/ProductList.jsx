@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import ProductCard from "./ProductCard";
 import { imageMap } from "../../utils/Productimage";
+import { rankProductsBySearch } from "../../utils/productSearch";
 import "./ProductList.css";
 
 const PRODUCTS_PER_PAGE = 10;
@@ -23,12 +25,16 @@ const CATEGORY_ICONS = {
 };
 
 const ProductList = () => {
+  const location = useLocation();
   const [products, setProducts]           = useState([]);
   const [categories, setCategories]       = useState([]);
   const [selectedidcategory, setSelected] = useState(null);
   const [currentPage, setCurrentPage]     = useState(1);
   const [isLoading, setIsLoading]         = useState(true);
   const [error, setError]                 = useState(null);
+
+  const queryParams = new URLSearchParams(location.search);
+  const searchQuery = queryParams.get("q");
 
   useEffect(() => {
     const loadData = async () => {
@@ -55,15 +61,40 @@ const ProductList = () => {
     loadData();
   }, []);
 
-  const filteredProducts =
-    selectedidcategory == null
+  useEffect(() => {
+    const path = location.pathname.toLowerCase();
+    if (path.startsWith("/trai-cay/noi-dia")) {
+      setSelected(1);
+    } else if (path.startsWith("/trai-cay/nhap-khau")) {
+      setSelected(2);
+    } else if (path.startsWith("/trai-cay/say")) {
+      setSelected(5);
+    } else if (path.startsWith("/rau-cu/rau-la-xanh")) {
+      setSelected(11);
+    } else if (path.startsWith("/rau-cu/cu-qua")) {
+      setSelected(12);
+    } else if (path.startsWith("/rau-cu/nam")) {
+      setSelected(13);
+    } else if (path.startsWith("/rau-cu/rau-gia-vi")) {
+      setSelected(14);
+    } else if (path.startsWith("/rau-cu")) {
+      setSelected(11);
+    } else {
+      setSelected(null);
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedidcategory, searchQuery]);
+
+  const filteredProducts = searchQuery
+    ? rankProductsBySearch(products, searchQuery, 9999)
+    : selectedidcategory == null
       ? products
       : products.filter(p => p.idcategory === selectedidcategory);
 
   const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE));
-
-  useEffect(() => { setCurrentPage(1); }, [selectedidcategory]);
-
   const safePage        = Math.min(currentPage, totalPages);
   const start           = (safePage - 1) * PRODUCTS_PER_PAGE;
   const visibleProducts = filteredProducts.slice(start, start + PRODUCTS_PER_PAGE);
@@ -73,38 +104,40 @@ const ProductList = () => {
 
   return (
     <div className="product-list-container">
-      <h2 className="section-title">Danh mục sản phẩm</h2>
+      <h2 className="section-title">
+        {searchQuery ? `Kết quả tìm kiếm cho "${searchQuery}"` : "Danh mục sản phẩm"}
+      </h2>
 
-      {/* CATEGORY GRID */}
-      <div className="category-grid-container">
-        <div
-          className={`category-item-card${selectedidcategory == null ? " active" : ""}`}
-          onClick={() => setSelected(null)}
-        >
-          <div className="category-icon-box">
-            <i className="bi bi-grid-fill" />
-          </div>
-          <p className="category-title">Tất cả</p>
-        </div>
-
-        {categories.map(cat => (
+      {!searchQuery && (
+        <div className="category-grid-container">
           <div
-            key={cat.id}
-            className={`category-item-card${selectedidcategory === cat.id ? " active" : ""}`}
-            onClick={() => setSelected(cat.id)}
+            className={`category-item-card${selectedidcategory == null ? " active" : ""}`}
+            onClick={() => setSelected(null)}
           >
             <div className="category-icon-box">
-              <i className={`bi ${CATEGORY_ICONS[cat.id] || CATEGORY_ICONS.default}`} />
+              <i className="bi bi-grid-fill" />
             </div>
-            <p className="category-title">{cat.name}</p>
+            <p className="category-title">Tất cả</p>
           </div>
-        ))}
-      </div>
 
-      {/* PRODUCT GRID */}
+          {categories.map(cat => (
+            <div
+              key={cat.id}
+              className={`category-item-card${selectedidcategory === cat.id ? " active" : ""}`}
+              onClick={() => setSelected(cat.id)}
+            >
+              <div className="category-icon-box">
+                <i className={`bi ${CATEGORY_ICONS[cat.id] || CATEGORY_ICONS.default}`} />
+              </div>
+              <p className="category-title">{cat.name}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
       <div className="products-grid-view">
         {filteredProducts.length === 0 ? (
-          <div className="pl-empty">Không có sản phẩm trong danh mục này.</div>
+          <div className="pl-empty">Không có sản phẩm nào phù hợp.</div>
         ) : (
           <>
             <div className="product-grid">

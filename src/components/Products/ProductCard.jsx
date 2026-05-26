@@ -43,57 +43,61 @@ const ProductCard = ({ product }) => {
     alert(`Đã thêm ${product.name} (Size M) vào giỏ hàng!`);
   };
 
+  const calculatedDiscount = product.oldPrice && product.price && product.oldPrice > product.price
+    ? Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100) + '%'
+    : null;
+
   return (
     <div className="pc" onClick={handleViewDetail}>
-      {product.discount && (
-        <div className="pc__badge">-{product.discount}</div>
+      {calculatedDiscount && (
+        <div className="pc-badge">-{calculatedDiscount}</div>
       )}
 
-      <div className="pc__img-wrap">
+      <div className="pc-img-wrap">
         <img
           src={product.image || 'https://via.placeholder.com/300x200'}
           alt={product.name}
-          className="pc__img"
+          className="pc-img"
           loading="lazy"
         />
       </div>
 
-      <div className="pc__body">
-        <h3 className="pc__name" title={product.name}>{product.name}</h3>
+      <div className="pc-body">
+        <h3 className="pc-name" title={product.name}>{product.name}</h3>
 
-        <div className="pc__sizes">
-          <span className="pc__size-label">Size:</span>
-          <div className="pc__size-tags">
-            {product.sizeS && <span className="pc__size-tag">S</span>}
-            {product.sizeM && <span className="pc__size-tag">M</span>}
-            {product.sizeL && <span className="pc__size-tag">L</span>}
+        <div className="pc-sizes">
+          <span className="pc-size-label">Size:</span>
+          <div className="pc-size-tags">
+            <span className="pc-size-tag">S</span>
+            <span className="pc-size-tag">M</span>
+            <span className="pc-size-tag">L</span>
           </div>
         </div>
 
-        <div className="pc__pricing">
-          <span className="pc__price">{product.currentPrice}</span>
-          {product.originalPrice && (
-            <span className="pc__price-old">{product.originalPrice}</span>
+        <div className="pc-pricing">
+          <span className="pc-price">{(product.price || 0).toLocaleString('vi-VN')}đ</span>
+          {product.oldPrice && (
+            <span className="pc-price-old">{product.oldPrice.toLocaleString('vi-VN')}đ</span>
           )}
         </div>
 
-        <div className="pc__meta">
-          <span className="pc__rating">
-            <i className="bi bi-star-fill" /> {product.rating}
+        <div className="pc-meta">
+          <span className="pc-rating">
+            <i className="bi bi-star-fill" /> {product.rating || '5.0'}
           </span>
-          <span className="pc__sold">Đã bán {product.sold}</span>
+          <span className="pc-sold">Đã bán {product.sold || (product.id * 3 + 12)}</span>
         </div>
 
-        <div className="pc__actions">
+        <div className="pc-actions">
           <button
-            className="pc__btn-buy"
+            className="pc-btn-buy"
             onClick={(e) => { e.stopPropagation(); handleViewDetail(); }}
             disabled={isLoading}
           >
             {isLoading ? '...' : 'MUA NGAY'}
           </button>
           <button
-            className="pc__btn-cart"
+            className="pc-btn-cart"
             onClick={handleQuickAdd}
             title="Thêm nhanh vào giỏ"
           >
