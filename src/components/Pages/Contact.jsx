@@ -25,9 +25,9 @@ const Contact = () => {
     <div className="contact-page">
       <div className="contact-container">
         <div className="contact-info">
-          <h2 className="contact-heading">Liên hệ với Leaf Fruit</h2>
+          <h2 className="contact-heading">Liên hệ với Tươi</h2>
           <p className="contact-desc">
-            Nếu bạn có bất kỳ thắc mắc nào về sản phẩm hoặc cần hỗ trợ, vui lòng để lại lời nhắn. Đội ngũ Leaf Fruit sẽ phản hồi bạn trong thời gian sớm nhất.
+            Nếu bạn có bất kỳ thắc mắc nào về sản phẩm hoặc cần hỗ trợ, vui lòng để lại lời nhắn. Đội ngũ Tươi sẽ phản hồi bạn trong thời gian sớm nhất.
           </p>
 
           <div className="info-list">
@@ -35,7 +35,7 @@ const Contact = () => {
               <i className="bi bi-geo-alt-fill"></i>
               <div>
                 <h4>Địa chỉ cửa hàng</h4>
-                <p>Ký túc xá Đại học Quốc gia, TP. Thủ Đức</p>
+                <p>124 Nguyễn Đình Chiểu, Phường 6, Quận 3, TP.HCM</p>
               </div>
             </div>
             <div className="info-item">
@@ -49,7 +49,7 @@ const Contact = () => {
               <i className="bi bi-envelope-fill"></i>
               <div>
                 <h4>Email liên hệ</h4>
-                <p>hello@leaffruit.com</p>
+                <p>hello@tuoi.vn</p>
               </div>
             </div>
           </div>
