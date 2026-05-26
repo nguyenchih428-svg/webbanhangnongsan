@@ -986,6 +986,11 @@
   color: var(--color-primary);
 }
 
+.ruang-notify i {
+  font-size: 1.15rem;
+}
+
+
 .ruang-badge {
   position: absolute;
   top: 2px;

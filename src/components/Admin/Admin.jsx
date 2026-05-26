@@ -354,13 +354,30 @@ const Admin = () => {
             <h1 className="ruang-heading">{sectionTitle}</h1>
           </div>
           <div className="ruang-topbar-right">
+            <button
+              type="button"
+              className="ruang-notify"
+              title="Thông báo"
+              style={{ marginRight: '8px' }}
+            >
+              <i className="bi bi-bell" />
+              <span className="ruang-badge">3</span>
+            </button>
+            <button
+              type="button"
+              className="ruang-notify"
+              title="Tin nhắn"
+              style={{ marginRight: '16px' }}
+            >
+              <i className="bi bi-chat-left-text" />
+              <span className="ruang-badge">5</span>
+            </button>
             <div className="ruang-user" ref={userMenuRef}>
               <button
                 type="button"
                 className="ruang-user-toggle"
                 onClick={() => setUserMenuOpen((v) => !v)}
               >
-                <span className="ruang-user-avatar">{staffInitials}</span>
                 <span className="ruang-user-name">{staffDisplayName}</span>
               </button>
               {userMenuOpen && (
