@@ -76,21 +76,8 @@ const Cart = () => {
       return total + price * (item.quantity || 1);
     }, 0);
   };
-
   const handleCheckout = () => {
-    const user = localStorage.getItem('currentUser');
-    if (!user) {
-      alert('Vui lòng đăng nhập để thanh toán!');
-      navigate('/login');
-      return;
-    }
-    if (cartItems.length === 0) {
-      alert('Giỏ hàng đang trống!');
-      return;
-    }
-    alert('Đặt hàng thành công!');
-    saveCart([]);
-    navigate('/');
+    navigate("/");
   };
 
   if (cartItems.length === 0) {

@@ -7,7 +7,26 @@
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+.login-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #27ae60;
+  text-decoration: none;
+  margin-top: 16px;
+  transition: color 0.2s ease, gap 0.2s ease;
+}
 
+.login-back:hover {
+  color: #1e8449;
+  gap: 8px;
+}
+
+.login-back i {
+  font-size: 18px;
+}
 .login-card {
   width: 100%;
   max-width: 420px;
