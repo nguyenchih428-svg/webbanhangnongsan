@@ -236,7 +236,7 @@ const Header = () => {
                 <div className="user-menu" ref={userMenuRef}>
                   <button className="user-btn" onClick={() => setUserMenuOpen(o => !o)}>
                     <i className="bi bi-person-circle" />
-                    <span>{currentUser.name || currentUser.user}</span>
+                    <span>{currentUser.name || currentUser.email || currentUser.user}</span>
                     <i className={`bi bi-chevron-down user-btn--chevron${userMenuOpen ? " open" : ""}`} />
                   </button>
 
@@ -251,7 +251,8 @@ const Header = () => {
                       >
                         Hồ sơ
                       </button>
-                      {currentUser.role === "staff" && (
+
+                      {["admin"].includes(currentUser.role) && (
                         <button
                           className="user-dropdown--item"
                           onClick={() => {
@@ -262,6 +263,7 @@ const Header = () => {
                           Quản trị
                         </button>
                       )}
+
                       <button className="user-dropdown--item user-dropdown--item--logout" onClick={handleLogout}>
                         Đăng xuất
                       </button>

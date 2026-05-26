@@ -1,8 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
-
-/* =========================
-   RESET + LAYOUT
-========================= */
 .ruang-layout,
 .ruang-layout * {
   box-sizing: border-box;
@@ -10,8 +5,6 @@
 
 .ruang-layout {
   min-height: 100vh;
-  font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, sans-serif;
   background: #f5fbf6;
   color: #4b5d52;
   display: flex;
@@ -23,9 +16,6 @@
   background: #f5fbf6;
 }
 
-/* =========================
-   OVERLAY
-========================= */
 .ruang-overlay {
   display: none;
   position: fixed;
@@ -44,9 +34,6 @@
   }
 }
 
-/* =========================
-   SIDEBAR
-========================= */
 .ruang-sidebar {
   position: fixed;
   top: 0;
@@ -54,12 +41,7 @@
   z-index: 999;
   width: 224px;
   min-height: 100vh;
-  background: linear-gradient(
-    180deg,
-    #28a745 0%,
-    #23913d 48%,
-    #1f7d35 100%
-  );
+  background: rgb(0, 149, 0);
   color: #fff;
   display: flex;
   flex-direction: column;
@@ -109,12 +91,17 @@
   border-radius: 6px 6px 0 0;
 }
 
-.ruang-sidebar nav {
+.ruang-sidebar__nav {
   list-style: none;
   padding: 0.5rem 0.75rem 1.25rem;
   margin: 0 0.5rem;
   background: rgba(0, 0, 0, 0.06);
   border-radius: 0 0 10px 10px;
+}
+
+.ruang-sidebar__nav li {
+  margin: 0;
+  padding: 0;
 }
 
 .ruang-sidebar__link {
@@ -132,7 +119,9 @@
   cursor: pointer;
   width: 100%;
   text-align: left;
-  transition: background 0.18s ease, color 0.18s ease;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 .ruang-sidebar__link:hover {
@@ -161,9 +150,6 @@
   transform: translateX(0);
 }
 
-/* =========================
-   SHELL
-========================= */
 .ruang-shell {
   flex: 1;
   margin-left: 224px;
@@ -179,9 +165,6 @@
   }
 }
 
-/* =========================
-   TOPBAR
-========================= */
 .ruang-topbar {
   position: sticky;
   top: 0;
@@ -246,14 +229,11 @@
 }
 
 .ruang-breadcrumb li + li::before {
-  content: '/';
+  content: "/";
   margin-right: 0.35rem;
   color: #c8d8cc;
 }
 
-/* =========================
-   MAIN CONTENT
-========================= */
 .ruang-main {
   flex: 1;
   padding: 1.5rem;
@@ -278,9 +258,6 @@
   }
 }
 
-/* =========================
-   STAT CARD
-========================= */
 .ruang-stat-card {
   background: #fff;
   border-radius: 10px;
@@ -347,9 +324,6 @@
   color: #28a745;
 }
 
-/* =========================
-   CARD
-========================= */
 .ruang-card {
   background: #fff;
   border-radius: 10px;
@@ -376,9 +350,6 @@
   color: #2d4739;
 }
 
-/* =========================
-   TABLE
-========================= */
 .admin-table-wrap {
   overflow-x: auto;
   background: #fff;
@@ -415,9 +386,6 @@
   border-bottom: none;
 }
 
-/* =========================
-   BUTTONS
-========================= */
 .admin-btn {
   padding: 10px 18px;
   font-size: 0.875rem;
@@ -428,7 +396,9 @@
   color: #fff;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
-  transition: opacity 0.18s ease, transform 0.12s ease;
+  transition:
+    opacity 0.18s ease,
+    transform 0.12s ease;
 }
 
 .admin-btn:hover:not(:disabled) {
@@ -445,9 +415,21 @@
   box-shadow: none;
 }
 
-/* =========================
-   FORM
-========================= */
+.admin-btn--danger {
+  background: linear-gradient(180deg, #dc3545 0%, #c82333 100%);
+  box-shadow: 0 2px 10px rgba(220, 53, 69, 0.25);
+}
+
+.admin-btn--sm {
+  padding: 6px 12px;
+  font-size: 0.75rem;
+}
+
+.admin-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .admin-form-card {
   background: #fff;
   border-radius: 10px;
@@ -501,9 +483,151 @@
   box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.2);
 }
 
-/* =========================
-   FOOTER
-========================= */
+.admin-form-grid__full {
+  grid-column: 1 / -1;
+}
+
+.admin-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2efe5;
+}
+
+.admin-form-card--wide {
+  max-width: 960px;
+}
+
+.admin-form-subtitle {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #2d4739;
+}
+
+.admin-code {
+  font-size: 0.75rem;
+  background: #f0f7f2;
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #3d5a47;
+}
+
+.admin-table__cell-address {
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-table--nested th,
+.admin-table--nested td {
+  padding: 0.55rem 0.85rem;
+  font-size: 0.78rem;
+}
+
+.admin-invoice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.admin-invoice-card {
+  overflow: hidden;
+}
+
+.admin-invoice-card__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e2efe5;
+}
+
+.admin-invoice-card__meta {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #6b7f72;
+  margin-top: 0.2rem;
+}
+
+.admin-invoice-card__right {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-invoice-card__total {
+  font-weight: 800;
+  color: #28a745;
+  font-size: 0.9rem;
+}
+
+.admin-item-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  align-items: end;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #f8fcf9;
+  border-radius: 8px;
+  border: 1px solid #e2efe5;
+}
+
+.admin-item-row label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6b7f72;
+}
+
+.admin-item-row input {
+  padding: 8px 10px;
+  border: 1px solid #cfe3d4;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.85rem;
+}
+
+.admin-item-row__remove {
+  align-self: center;
+}
+
+.admin-toolbar-search input {
+  min-width: 140px;
+  width: auto;
+}
+
+.admin-dashboard {
+  width: 100%;
+}
+
+.admin-panel {
+  width: 100%;
+  min-width: 0;
+}
+
+.admin-table__detail-row > td {
+  padding: 0.5rem 1rem 1rem;
+  background: #f8fcf9;
+}
+
+.admin-table__detail-row .admin-table--nested {
+  margin: 0;
+  border: 1px solid #e2efe5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
 .ruang-footer {
   padding: 1.25rem 1.5rem;
   margin-top: auto;
@@ -524,9 +648,7 @@
 .ruang-footer a:hover {
   text-decoration: underline;
 }
-/* =========================
-   DASHBOARD GRID
-========================= */
+
 .ruang-dashboard-grid {
   display: grid;
   grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
@@ -540,9 +662,6 @@
   }
 }
 
-/* =========================
-   REVENUE LIST
-========================= */
 .ruang-revenue-list {
   padding: 1rem 1.25rem 1.25rem;
 }
@@ -578,9 +697,6 @@
   background: linear-gradient(90deg, #28a745, #20c997);
 }
 
-/* =========================
-   SOLD LIST
-========================= */
 .ruang-sold-list {
   padding: 1rem 1.25rem 1.25rem;
 }
@@ -631,13 +747,11 @@
   background: #17a2b8;
 }
 
-/* =========================
-   BOTTOM GRID
-========================= */
 .ruang-bottom-grid {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1.25rem;
+  margin-top: 0;
 }
 
 @media (max-width: 980px) {
@@ -646,9 +760,6 @@
   }
 }
 
-/* =========================
-   MINI BUTTON
-========================= */
 .ruang-mini-btn {
   border: none;
   background: linear-gradient(180deg, #28a745 0%, #218838 100%);
@@ -660,9 +771,6 @@
   cursor: pointer;
 }
 
-/* =========================
-   STATUS
-========================= */
 .ruang-status {
   display: inline-block;
   font-size: 0.68rem;
@@ -695,9 +803,6 @@
   background: #6c757d;
 }
 
-/* =========================
-   DETAIL BUTTON
-========================= */
 .ruang-detail-btn {
   border: none;
   border-radius: 6px;
@@ -709,9 +814,6 @@
   cursor: pointer;
 }
 
-/* =========================
-   VIP SECTION
-========================= */
 .ruang-vip-title {
   padding: 1rem 1.25rem;
   background: linear-gradient(180deg, #28a745 0%, #218838 100%);
@@ -743,9 +845,6 @@
   font-weight: 600;
 }
 
-/* =========================
-   MESSAGE
-========================= */
 .admin-msg {
   padding: 12px 16px;
   border-radius: 8px;
@@ -766,9 +865,6 @@
   border: 1px solid #bde5c8;
 }
 
-/* =========================
-   TOOLBAR
-========================= */
 .admin-toolbar {
   margin: 0;
 }
@@ -818,9 +914,6 @@
   padding: 1.5rem 1rem !important;
 }
 
-/* =========================
-   TABLE BUTTONS
-========================= */
 .admin-table__actions {
   display: flex;
   gap: 8px;
@@ -857,9 +950,6 @@
   background: #fff5f5;
 }
 
-/* =========================
-   LOADING
-========================= */
 .ruang-loading {
   padding: 2rem 1.25rem;
   text-align: center;
@@ -867,9 +957,6 @@
   color: #6b7f72;
 }
 
-/* =========================
-   USER SECTION
-========================= */
 .ruang-topbar__right {
   display: flex;
   align-items: center;
@@ -889,7 +976,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.18s ease, color 0.18s ease;
+  transition:
+    background 0.18s ease,
+    color 0.18s ease;
 }
 
 .ruang-notify:hover {
@@ -913,9 +1002,6 @@
   text-align: center;
 }
 
-/* =========================
-   USER MENU
-========================= */
 .ruang-user {
   position: relative;
   padding-left: 0.35rem;
@@ -1013,9 +1099,6 @@
   color: #2d4739;
 }
 
-/* =========================
-   ADMIN PRODUCT
-========================= */
 .admin-product-embed {
   width: 100%;
   max-width: 1200px;
@@ -1077,9 +1160,6 @@
   padding: 24px 20px 48px;
 }
 
-/* =========================
-   MODAL
-========================= */
 .ruang-modal-backdrop {
   position: fixed;
   inset: 0;

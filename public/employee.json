@@ -1,35 +1,58 @@
 [
   {
     "id": 1,
-    "employeeId": "NV001",
-    "user": "admin@fruitshop.vn",
-    "password": "adminpassword",
     "name": "Lê Minh Quản Trị",
     "position": "Quản lý cửa hàng",
-    "role": "admin",
     "phone": "0900000001",
-    "status": "Đang làm việc"
+    "email": "admin@fruitshop.vn"
   },
   {
     "id": 2,
-    "employeeId": "NV002",
-    "user": "banhang01@fruitshop.vn",
-    "password": "salespassword",
     "name": "Nguyễn Thu Thủy",
     "position": "Nhân viên bán hàng",
-    "role": "sales",
     "phone": "0900000002",
-    "status": "Đang làm việc"
+    "email": "banhang01@fruitshop.vn"
   },
   {
     "id": 3,
-    "employeeId": "NV003",
-    "user": "kho01@fruitshop.vn",
-    "password": "warehousepassword",
     "name": "Phạm Quốc Huy",
     "position": "Nhân viên kho",
-    "role": "warehouse",
     "phone": "0900000003",
-    "status": "Nghỉ phép"
+    "email": "kho01@fruitshop.vn"
+  },
+  {
+    "id": 4,
+    "name": "Trần Hoàng Bách",
+    "position": "Nhân viên thu ngân",
+    "phone": "0900000004",
+    "email": "thungan01@fruitshop.vn"
+  },
+  {
+    "id": 5,
+    "name": "Vũ Thị Hồng",
+    "position": "Nhân viên pha chế",
+    "phone": "0900000005",
+    "email": "phache01@fruitshop.vn"
+  },
+  {
+    "id": 6,
+    "name": "Đặng Minh Khôi",
+    "position": "Nhân viên giao hàng",
+    "phone": "0900000006",
+    "email": "shipper01@fruitshop.vn"
+  },
+  {
+    "id": 7,
+    "name": "Hoàng Ngọc Mai",
+    "position": "Nhân viên kế toán",
+    "phone": "0900000007",
+    "email": "ketoan01@fruitshop.vn"
+  },
+  {
+    "id": 8,
+    "name": "Đỗ Tiến Đạt",
+    "position": "Nhân viên bảo vệ",
+    "phone": "0900000008",
+    "email": "baove01@fruitshop.vn"
   }
 ]

@@ -2,6 +2,12 @@
   padding: 60px 20px;
   font-family: "Segoe UI", sans-serif;
   color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  max-width: calc(100% - 20%);
 }
 .news-title {
   text-align: center;
@@ -23,7 +29,6 @@
   background-color: #27ae60;
   border-radius: 2px;
 }
-
 
 .btn-readmore {
   background: #27ae60;

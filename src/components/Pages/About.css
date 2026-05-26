@@ -1,7 +1,7 @@
 .about-wrap {
   padding: 60px 20px;
   font-family: sans-serif;
-  max-width: 1200px;
+  max-width: calc(100% - 20%);
   margin: 0 auto;
 }
 

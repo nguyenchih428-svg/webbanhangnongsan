@@ -1,35 +1,82 @@
 [
   {
     "id": 1,
-    "user": "khachhang01@gmail.com",
-    "password": "password123",
     "name": "Nguyễn Văn An",
+    "gender": "Nam",
+    "email": "khachhang01@gmail.com",
     "phone": "0901234567",
-    "address": "123 Đường Nông Lâm, Linh Trung, Thủ Đức",
-    "role": "customer",
-    "membership": "Gold",
-    "avatar": "/img/avatar1.png"
+    "address": "123 Đường Nông Lâm, Linh Trung, Thủ Đức"
   },
   {
     "id": 2,
-    "user": "tranb@gmail.com",
-    "password": "password456",
     "name": "Trần Thị Bình",
+    "gender": "Nữ",
+    "email": "tranb@gmail.com",
     "phone": "0987654321",
-    "address": "456 Lê Văn Việt, Quận 9, TP.HCM",
-    "role": "customer",
-    "membership": "Silver",
-    "avatar": "/img/avatar2.png"
+    "address": "456 Lê Văn Việt, Quận 9, TP.HCM"
   },
   {
     "id": 3,
-    "user": "lecuong@gmail.com",
-    "password": "password789",
     "name": "Lê Văn Cường",
+    "gender": "Nam",
+    "email": "lecuong@gmail.com",
     "phone": "0912333444",
-    "address": "789 Kha Vạn Cân, Thủ Đức, TP.HCM",
-    "role": "customer",
-    "membership": "Bronze",
-    "avatar": "/img/avatar3.png"
+    "address": "789 Kha Vạn Cân, Thủ Đức, TP.HCM"
+  },
+  {
+    "id": 4,
+    "name": "Ngô Minh Tân",
+    "gender": "Nam",
+    "email": "khachhang@gmail.com",
+    "phone": "0345678910",
+    "address": "TP. Thủ Đức"
+  },
+  {
+    "id": 5,
+    "name": "Nguyễn Chí Hiếu",
+    "gender": "Nam",
+    "email": "hieu@gmail.com",
+    "phone": "0912345678",
+    "address": "123 Lê Lợi, Quận 1, TP.HCM"
+  },
+  {
+    "id": 6,
+    "name": "Phạm Tuấn Tú",
+    "gender": "Nam",
+    "email": "tuantu@gmail.com",
+    "phone": "0933445566",
+    "address": "12 Nguyễn Văn Bá, Thủ Đức, TP.HCM"
+  },
+  {
+    "id": 7,
+    "name": "Vũ Mai Phương",
+    "gender": "Nữ",
+    "email": "maiphuong@gmail.com",
+    "phone": "0977889900",
+    "address": "34 Võ Văn Ngân, Thủ Đức, TP.HCM"
+  },
+  {
+    "id": 8,
+    "name": "Đinh Hải Yến",
+    "gender": "Nữ",
+    "email": "haiyen@gmail.com",
+    "phone": "0922112233",
+    "address": "Khu công nghệ cao, Quận 9, TP.HCM"
+  },
+  {
+    "id": 9,
+    "name": "Bùi Việt Hoàng",
+    "gender": "Nam",
+    "email": "viethoang@gmail.com",
+    "phone": "0944556677",
+    "address": "88 Tô Vĩnh Diện, Thủ Đức, TP.HCM"
+  },
+  {
+    "id": 10,
+    "name": "Lê Phương Thảo",
+    "gender": "Nữ",
+    "email": "phuongthao@gmail.com",
+    "phone": "0999888777",
+    "address": "56 Hoàng Diệu 2, Thủ Đức, TP.HCM"
   }
 ]

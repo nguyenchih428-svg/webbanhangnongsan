@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useMemo, useRef, } from 'react';
-
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Adminproduct from './Adminproduct';
 import Admincategory from './Admincategory';
 import Admincustomer from './Admincustomer';
@@ -11,8 +10,48 @@ import './Admin.css';
 
 const jsonBase = import.meta.env.BASE_URL || '/';
 
+function fmtNumber(n) {
+  return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function fmtCurrency(n) {
+  return `${fmtNumber(Number(n) || 0)} đ`;
+}
+
+function fmtDateTime(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return String(iso);
+  return d.toLocaleString('vi-VN', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+  });
+}
+
+const BILL_STATUS_VI = {
+  'đã giao hàng': { cls: 'done' },
+  'đang giao hàng': { cls: 'shipping' },
+  'đã thanh toán': { cls: 'processing' },
+  'chờ xử lý': { cls: 'pending' },
+  'đã hủy': { cls: 'pending' },
+};
+
+function billStatusBadge(statusRaw) {
+  const label = String(statusRaw || '').trim() || 'Chưa xác định';
+  const key = label.toLowerCase();
+  const mapped = BILL_STATUS_VI[key];
+  return { label, cls: mapped?.cls || 'unknown' };
+}
+
+function checkAdminRole(user) {
+  return user?.role === 'admin';
+}
+
 const SECTION_LABEL = {
-  dashboard: 'Dashboard',
+  dashboard: 'Trang chủ',
   products: 'Sản phẩm',
   category: 'Danh mục',
   customer: 'Khách hàng',
@@ -21,146 +60,85 @@ const SECTION_LABEL = {
   invoiceDetails: 'Chi tiết hóa đơn',
 };
 
-function fmtNumber(n) {
-  return String(Math.round(n)).replace(
-    /\B(?=(\d{3})+(?!\d))/g,
-    ','
-  );
-}
-
-function fmtCurrency(n) {
-  return `${fmtNumber(Number(n) || 0)} đ`;
-}
-
-/* =========================
-   BILL STATUS
-========================= */
-
-const BILL_STATUS_MAP = {
-  delivered: {
-    label: 'Đã giao hàng',
-    cls: 'done',
-  },
-
-  shipping: {
-    label: 'Vận chuyển',
-    cls: 'shipping',
-  },
-
-  pending: {
-    label: 'Chưa giải quyết',
-    cls: 'pending',
-  },
-
-  processing: {
-    label: 'Xử lý',
-    cls: 'processing',
-  },
+const SECTION_ICON = {
+  dashboard: 'bi-house',
+  products: 'bi-box-seam',
+  category: 'bi-tags',
+  customer: 'bi-people',
+  employee: 'bi-person-badge',
+  bill: 'bi-receipt',
+  invoiceDetails: 'bi-receipt-cutoff',
 };
 
-function billStatusFromJson(statusRaw) {
-  const key = String(statusRaw || '')
-    .trim()
-    .toLowerCase();
+const PATH_TO_SECTION = {
+  '/admin': 'dashboard',
+  '/admin/product': 'products',
+  '/admin/category': 'category',
+  '/admin/customer': 'customer',
+  '/admin/employee': 'employee',
+  '/admin/bill': 'bill',
+  '/admin/invoicedetails': 'invoiceDetails',
+};
 
-  if (BILL_STATUS_MAP[key]) {
-    return {
-      key,
-      ...BILL_STATUS_MAP[key],
-    };
-  }
-
-  return {
-    key: 'unknown',
-    label: key
-      ? String(statusRaw).trim()
-      : 'Chưa xác định',
-    cls: 'unknown',
-  };
-}
-
-/* =========================
-   COMPONENT
-========================= */
+const SECTION_TO_PATH = {
+  dashboard: '/admin',
+  products: '/admin/product',
+  category: '/admin/category',
+  customer: '/admin/customer',
+  employee: '/admin/employee',
+  bill: '/admin/bill',
+  invoiceDetails: '/admin/invoicedetails',
+};
 
 const Admin = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [allowed, setAllowed] = useState(false);
-
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [bills, setBills] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [employees, setEmployees] = useState([]);
-  const [invoiceDetails, setInvoiceDetails] =
-    useState([]);
-
+  const [invoiceDetails, setInvoiceDetails] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [loadError, setLoadError] = useState('');
-
-  const [mobileSidebarOpen, setMobileSidebarOpen] =
-    useState(false);
-
-  const [userMenuOpen, setUserMenuOpen] =
-    useState(false);
-
-  const [logoutModalOpen, setLogoutModalOpen] =
-    useState(false);
-
-  const [adminSection, setAdminSection] =
-    useState('dashboard');
-
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  const [logoutModalOpen, setLogoutModalOpen] = useState(false);
+  const [adminSection, setAdminSection] = useState('dashboard');
   const userMenuRef = useRef(null);
 
-  /* =========================
-     AUTH CHECK
-  ========================= */
+  useEffect(() => {
+    const path = location.pathname.toLowerCase();
+    const section = PATH_TO_SECTION[path] ?? 'dashboard';
+    setAdminSection(section);
+  }, [location.pathname]);
 
   useEffect(() => {
-    const raw =
-      localStorage.getItem('currentUser');
-
+    const raw = localStorage.getItem('currentUser');
     if (!raw) {
       navigate('/login');
       return;
     }
-
     try {
       const u = JSON.parse(raw);
-
-      if (u.role !== 'staff') {
+      if (!checkAdminRole(u)) {
         navigate('/');
         return;
       }
-
       setAllowed(true);
     } catch {
       navigate('/login');
     }
   }, [navigate]);
 
-  /* =========================
-     LOAD DATA
-  ========================= */
-
   useEffect(() => {
     if (!allowed) return;
-
     const load = async () => {
       setLoading(true);
       setLoadError('');
-
       try {
-        const [
-          pRes,
-          cRes,
-          bRes,
-          cuRes,
-          eRes,
-          iRes,
-        ] = await Promise.all([
+        const [pRes, cRes, bRes, cuRes, eRes, iRes] = await Promise.all([
           fetch(`${jsonBase}products.json`),
           fetch(`${jsonBase}category.json`),
           fetch(`${jsonBase}bill.json`),
@@ -168,534 +146,532 @@ const Admin = () => {
           fetch(`${jsonBase}employee.json`),
           fetch(`${jsonBase}invoicedetails.json`),
         ]);
-
-        if (!pRes.ok) {
-          throw new Error(
-            'Không tải được products.json'
-          );
-        }
-
+        if (!pRes.ok) throw new Error('Không tải được products.json');
         const pdata = await pRes.json();
-
-        setProducts(
-          Array.isArray(pdata) ? pdata : []
-        );
-
+        setProducts(Array.isArray(pdata) ? pdata : []);
         if (cRes.ok) {
           const cdata = await cRes.json();
-
-          setCategories(
-            Array.isArray(cdata) ? cdata : []
-          );
+          setCategories(Array.isArray(cdata) ? cdata : []);
         }
-
         if (bRes.ok) {
           const bdata = await bRes.json();
-
-          setBills(
-            Array.isArray(bdata) ? bdata : []
-          );
+          setBills(Array.isArray(bdata) ? bdata : []);
         }
-
         if (cuRes.ok) {
           const cudata = await cuRes.json();
-
-          setCustomers(
-            Array.isArray(cudata)
-              ? cudata
-              : []
-          );
+          setCustomers(Array.isArray(cudata) ? cudata : []);
         }
-
         if (eRes.ok) {
           const edata = await eRes.json();
-
-          setEmployees(
-            Array.isArray(edata)
-              ? edata
-              : []
-          );
+          setEmployees(Array.isArray(edata) ? edata : []);
         }
-
         if (iRes.ok) {
           const idata = await iRes.json();
-
-          setInvoiceDetails(
-            Array.isArray(idata)
-              ? idata
-              : []
-          );
+          setInvoiceDetails(Array.isArray(idata) ? idata : []);
         }
       } catch (e) {
-        setLoadError(
-          e.message || 'Lỗi tải dữ liệu'
-        );
+        setLoadError(e.message || 'Lỗi tải dữ liệu');
       } finally {
         setLoading(false);
       }
     };
-
     load();
   }, [allowed]);
 
-  /* =========================
-     USER MENU
-  ========================= */
-
   useEffect(() => {
     if (!userMenuOpen) return;
-
     const handler = (e) => {
-      if (
-        userMenuRef.current &&
-        !userMenuRef.current.contains(e.target)
-      ) {
+      if (userMenuRef.current && !userMenuRef.current.contains(e.target)) {
         setUserMenuOpen(false);
       }
     };
-
-    document.addEventListener(
-      'mousedown',
-      handler
-    );
-
-    return () => {
-      document.removeEventListener(
-        'mousedown',
-        handler
-      );
-    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
   }, [userMenuOpen]);
 
-  /* =========================
-     USER INFO
-  ========================= */
+  const currentUser = useMemo(() => {
+    try {
+      const raw = localStorage.getItem('currentUser');
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
+  }, []);
 
   const staffInitials = useMemo(() => {
-    try {
-      const raw =
-        localStorage.getItem('currentUser');
+    const name = String(currentUser?.fullName || currentUser?.user || 'AD').trim();
+    const parts = name.split(/\s+/).filter(Boolean);
+    if (!parts.length) return 'AD';
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }, [currentUser]);
 
-      if (!raw) return 'AD';
-
-      const u = JSON.parse(raw);
-
-      const name = String(
-        u.user || u.name || 'Staff'
-      ).trim();
-
-      const parts = name
-        .split(/\s+/)
-        .filter(Boolean);
-
-      if (!parts.length) return 'AD';
-
-      if (parts.length === 1) {
-        return parts[0]
-          .slice(0, 2)
-          .toUpperCase();
-      }
-
-      return (
-        parts[0][0] +
-        parts[parts.length - 1][0]
-      ).toUpperCase();
-    } catch {
-      return 'AD';
-    }
-  }, []);
-
-  const staffDisplayName = useMemo(() => {
-    try {
-      const raw =
-        localStorage.getItem('currentUser');
-
-      if (!raw) return 'Administrator';
-
-      const u = JSON.parse(raw);
-
-      return (
-        String(
-          u.user || u.name || 'Staff'
-        ).trim() || 'Administrator'
-      );
-    } catch {
-      return 'Administrator';
-    }
-  }, []);
-
-  /* =========================
-     STATS
-  ========================= */
+  const staffDisplayName = useMemo(
+    () => String(currentUser?.fullName || currentUser?.user || 'Quản trị viên').trim(),
+    [currentUser]
+  );
 
   const stats = useMemo(() => {
-    const total = products.length;
+    const soldSum = invoiceDetails.reduce((sum, inv) => {
+      const items = Array.isArray(inv.items) ? inv.items : [];
+      return sum + items.reduce((s, it) => s + Number(it.quantity || 0), 0);
+    }, 0);
 
-    const soldSum =
-      invoiceDetails.reduce(
-        (sum, item) =>
-          sum + Number(item.quantity || 0),
-        0
-      );
-
-    const catCount = categories.length;
-
-    const uncategorized =
-      products.filter(
-        (p) =>
-          p.categoryid == null ||
-          p.categoryid === ''
-      ).length;
+    const uncategorized = products.filter(
+      (p) => p.idcategory == null || p.idcategory === ''
+    ).length;
 
     const revenue = bills.reduce(
-      (sum, bill) =>
-        sum + Number(bill.total || 0),
+      (sum, bill) => sum + Number(bill.totalAmount || 0),
       0
     );
 
-    const avgBill = bills.length
-      ? revenue / bills.length
-      : 0;
+    const avgBill = bills.length ? revenue / bills.length : 0;
 
     return {
-      total,
+      total: products.length,
       soldSum,
-      catCount,
+      catCount: categories.length,
       uncategorized,
       revenue,
       avgBill,
+      billCount: bills.length,
     };
-  }, [
-    products,
-    categories,
-    invoiceDetails,
-    bills,
-  ]);
+  }, [products, categories, invoiceDetails, bills]);
 
-  /* =========================
-     ACTIONS
-  ========================= */
+  const recentBills = useMemo(
+    () =>
+      [...bills]
+        .sort((a, b) => new Date(b.orderDate) - new Date(a.orderDate))
+        .slice(0, 5),
+    [bills]
+  );
+
+  const topProducts = useMemo(() => {
+    const counts = {};
+    invoiceDetails.forEach((inv) => {
+      (inv.items || []).forEach((it) => {
+        const key = it.productName || `SP-${it.productId}`;
+        if (!counts[key]) {
+          counts[key] = { name: key, qty: 0, revenue: 0 };
+        }
+        counts[key].qty += Number(it.quantity || 0);
+        counts[key].revenue += Number(it.subtotal || 0);
+      });
+    });
+    return Object.values(counts)
+      .sort((a, b) => b.qty - a.qty)
+      .slice(0, 5);
+  }, [invoiceDetails]);
+
+  const topRevenueBills = useMemo(
+    () =>
+      [...bills]
+        .sort((a, b) => Number(b.totalAmount || 0) - Number(a.totalAmount || 0))
+        .slice(0, 5),
+    [bills]
+  );
+
+  const topCustomers = useMemo(() => {
+    const map = {};
+    bills.forEach((b) => {
+      const name = b.customerName || 'Khách lẻ';
+      if (!map[name]) {
+        map[name] = { name, phone: b.phone || '', orders: 0, total: 0 };
+      }
+      map[name].orders += 1;
+      map[name].total += Number(b.totalAmount || 0);
+      if (!map[name].phone && b.phone) map[name].phone = b.phone;
+    });
+    return Object.values(map)
+      .sort((a, b) => b.total - a.total)
+      .slice(0, 5);
+  }, [bills]);
 
   const goHome = () => navigate('/');
-
   const logout = () => {
     localStorage.removeItem('currentUser');
-
-    window.dispatchEvent(
-      new Event('userUpdated')
-    );
-
+    window.dispatchEvent(new Event('userUpdated'));
     navigate('/login');
-
     setLogoutModalOpen(false);
   };
-
-  const closeMobileNav = () => {
-    setMobileSidebarOpen(false);
-  };
-
-  /* =========================
-     LOADING
-  ========================= */
+  const closeMobileNav = () => setMobileSidebarOpen(false);
 
   if (!allowed) {
-    return (
-      <div
-        className="ruang-boot"
-        aria-hidden
-      />
-    );
+    return <div className="ruang-boot" aria-hidden />;
   }
 
-  /* =========================
-     JSX
-  ========================= */
+  const sectionTitle = SECTION_LABEL[adminSection] || 'Admin';
 
   return (
     <div className="ruang-layout">
-
-      {/* OVERLAY */}
-
       <div
-        className={`ruang-overlay ${mobileSidebarOpen
-            ? 'is-visible'
-            : ''
-          }`}
+        className={`ruang-overlay ${mobileSidebarOpen ? 'is-visible' : ''}`}
         onClick={closeMobileNav}
         aria-hidden={!mobileSidebarOpen}
       />
 
-      {/* SIDEBAR */}
-
-      <aside
-        className={`ruang-sidebar ${mobileSidebarOpen
-            ? 'is-open'
-            : ''
-          }`}
-      >
+      <aside className={`ruang-sidebar ${mobileSidebarOpen ? 'is-open' : ''}`}>
         <div className="ruang-sidebar__brand">
           <span className="ruang-sidebar__brand-icon">
-            <i className="fa-solid fa-layer-group" />
+            <i className="bi bi-flower2" />
           </span>
-
-          <span>GalaxyCafe</span>
+          <span>Leaf Fruit</span>
         </div>
-
         <hr className="ruang-sidebar__divider" />
-
-        <div className="ruang-sidebar__heading">
-          Tiện ích
-        </div>
-
+        <div className="ruang-sidebar__heading">Quản lý</div>
         <ul className="ruang-sidebar__nav">
-
-          {Object.entries(SECTION_LABEL).map(
-            ([key, label]) => (
-              <li key={key}>
-                <button
-                  type="button"
-                  className={`ruang-sidebar__link ${adminSection === key
-                      ? 'is-active'
-                      : ''
-                    }`}
+          {Object.entries(SECTION_LABEL).map(([key, label]) => (
+            <li key={key}>
+              <button
+                type="button"
+                className={`ruang-sidebar__link ${adminSection === key ? 'is-active' : ''}`}
                   onClick={() => {
                     setAdminSection(key);
+                    navigate(SECTION_TO_PATH[key] || '/Admin');
                     closeMobileNav();
                   }}
-                >
-                  {label}
-                </button>
-              </li>
-            )
-          )}
-
+              >
+                <i className={`bi ${SECTION_ICON[key] || 'bi-circle'}`} />
+                {label}
+              </button>
+            </li>
+          ))}
         </ul>
       </aside>
 
-      {/* MAIN */}
-
       <div className="ruang-shell">
-
-        {/* TOPBAR */}
-
         <header className="ruang-topbar">
-
           <button
             type="button"
             className="ruang-topbar__toggle"
-            onClick={() =>
-              setMobileSidebarOpen(
-                (v) => !v
-              )
-            }
+            onClick={() => setMobileSidebarOpen((v) => !v)}
+            aria-label="Mở menu"
           >
-            <i className="fa-solid fa-bars" />
+            <i className="bi bi-list" />
           </button>
-
+          <div className="ruang-breadcrumb-wrap">
+            <h1 className="ruang-heading">{sectionTitle}</h1>
+          </div>
           <div className="ruang-topbar__right">
-
-            <div
-              className="ruang-user"
-              ref={userMenuRef}
-            >
+            <div className="ruang-user" ref={userMenuRef}>
               <button
                 type="button"
                 className="ruang-user__toggle"
-                onClick={() =>
-                  setUserMenuOpen(
-                    (v) => !v
-                  )
-                }
+                onClick={() => setUserMenuOpen((v) => !v)}
               >
-                <span className="ruang-user__avatar">
-                  {staffInitials}
-                </span>
-
-                <span className="ruang-user__name">
-                  {staffDisplayName}
-                </span>
+                <span className="ruang-user__avatar">{staffInitials}</span>
+                <span className="ruang-user__name">{staffDisplayName}</span>
               </button>
-
               {userMenuOpen && (
                 <div className="ruang-user__menu">
-
-                  <button
-                    type="button"
-                    onClick={goHome}
-                  >
-                    Trang chủ
+                  <div className="ruang-user__menu-title">Tài khoản</div>
+                  <button type="button" onClick={goHome}>
+                    <i className="bi bi-house" /> Trang chủ
                   </button>
-
                   <button
                     type="button"
                     onClick={() => {
-                      setLogoutModalOpen(
-                        true
-                      );
+                      setUserMenuOpen(false);
+                      setLogoutModalOpen(true);
                     }}
                   >
-                    Đăng xuất
+                    <i className="bi bi-box-arrow-right" /> Đăng xuất
                   </button>
-
                 </div>
               )}
             </div>
           </div>
         </header>
 
-        {/* CONTENT */}
-
         <main className="ruang-main">
-
           {loadError && (
-            <div className="admin-msg admin-msg--error">
-              {loadError}
+            <div className="admin-msg admin-msg--error">{loadError}</div>
+          )}
+
+          {adminSection !== 'dashboard' && (
+            <div className="admin-panel">
+              {adminSection === 'products' && <Adminproduct embedded />}
+              {adminSection === 'category' && <Admincategory embedded />}
+              {adminSection === 'customer' && <Admincustomer embedded />}
+              {adminSection === 'employee' && <Adminemployee embedded />}
+              {adminSection === 'bill' && <Adminbill embedded />}
+              {adminSection === 'invoiceDetails' && (
+                <Admininvoicedetails embedded />
+              )}
             </div>
           )}
 
-          {loading ? (
-            <div className="ruang-loading">
-              Đang tải...
-            </div>
-          ) : (
-            <>
-              {adminSection ===
-                'products' && (
-                  <AdminProduct embedded />
-                )}
-
-              {adminSection ===
-                'category' && (
-                  <AdminCategory embedded />
-                )}
-
-              {adminSection ===
-                'customer' && (
-                  <AdminCustomer embedded />
-                )}
-
-              {adminSection ===
-                'employee' && (
-                  <AdminEmployee embedded />
-                )}
-
-              {adminSection ===
-                'bill' && (
-                  <AdminBill embedded />
-                )}
-
-              {adminSection ===
-                'invoiceDetails' && (
-                  <AdminInvoiceDetails embedded />
-                )}
-
-              {adminSection ===
-                'dashboard' && (
-                  <div className="dashboard">
-                    <h2>
-                      Dashboard
-                    </h2>
-
-                    <div className="stats-grid">
-
-                      <div className="stat-card">
-                        <h4>
-                          Doanh thu
-                        </h4>
-
-                        <p>
-                          {fmtCurrency(
-                            stats.revenue
-                          )}
-                        </p>
+          {adminSection === 'dashboard' &&
+            (loading ? (
+              <div className="ruang-loading">Đang tải dữ liệu...</div>
+            ) : (
+                <div className="admin-dashboard">
+                  <div className="ruang-cards">
+                    <div className="ruang-stat-card">
+                      <div className="ruang-stat-card__body">
+                        <div className="ruang-stat-card__label">Doanh thu</div>
+                        <div className="ruang-stat-card__value">
+                          {fmtCurrency(stats.revenue)}
+                        </div>
+                        <span className="ruang-stat-card__badge">
+                          {fmtNumber(stats.billCount)} hóa đơn
+                        </span>
                       </div>
-
-                      <div className="stat-card">
-                        <h4>
-                          Sản phẩm
-                        </h4>
-
-                        <p>
-                          {fmtNumber(
-                            stats.total
-                          )}
-                        </p>
+                      <span className="ruang-stat-card__icon">
+                        <i className="bi bi-cash-coin" />
+                      </span>
+                    </div>
+                    <div className="ruang-stat-card ruang-stat-card--green">
+                      <div className="ruang-stat-card__body">
+                        <div className="ruang-stat-card__label">Sản phẩm</div>
+                        <div className="ruang-stat-card__value">
+                          {fmtNumber(stats.total)}
+                        </div>
+                        <span className="ruang-stat-card__badge ruang-stat-card__badge--muted">
+                          {fmtNumber(stats.catCount)} danh mục
+                        </span>
                       </div>
-
-                      <div className="stat-card">
-                        <h4>
-                          Khách hàng
-                        </h4>
-
-                        <p>
-                          {fmtNumber(
-                            customers.length
-                          )}
-                        </p>
+                      <span className="ruang-stat-card__icon">
+                        <i className="bi bi-box-seam" />
+                      </span>
+                    </div>
+                    <div className="ruang-stat-card ruang-stat-card--cyan">
+                      <div className="ruang-stat-card__body">
+                        <div className="ruang-stat-card__label">Khách hàng</div>
+                        <div className="ruang-stat-card__value">
+                          {fmtNumber(customers.length)}
+                        </div>
+                        <span className="ruang-stat-card__badge ruang-stat-card__badge--muted">
+                          {fmtNumber(employees.length)} nhân viên
+                        </span>
                       </div>
-
+                      <span className="ruang-stat-card__icon">
+                        <i className="bi bi-people" />
+                      </span>
+                    </div>
+                    <div className="ruang-stat-card ruang-stat-card--amber">
+                      <div className="ruang-stat-card__body">
+                        <div className="ruang-stat-card__label">Đã bán</div>
+                        <div className="ruang-stat-card__value">
+                          {fmtNumber(stats.soldSum)}
+                        </div>
+                        <span className="ruang-stat-card__badge">
+                          TB {fmtCurrency(stats.avgBill)}/đơn
+                        </span>
+                      </div>
+                      <span className="ruang-stat-card__icon">
+                        <i className="bi bi-cart3" />
+                      </span>
                     </div>
                   </div>
-                )}
-            </>
-          )}
+
+                  <div className="ruang-dashboard-grid">
+                    <div className="ruang-card">
+                      <div className="ruang-card__title-bar">
+                        <h6>Hóa đơn gần đây</h6>
+                      </div>
+                      <div className="admin-table-wrap">
+                        <table className="admin-table">
+                          <thead>
+                            <tr>
+                              <th>Mã HD</th>
+                              <th>Khách hàng</th>
+                              <th>Ngày</th>
+                              <th>Tổng</th>
+                              <th>Trạng thái</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {recentBills.length === 0 ? (
+                              <tr>
+                                <td colSpan={5} className="admin-table__empty">
+                                  Chưa có hóa đơn
+                                </td>
+                              </tr>
+                            ) : (
+                              recentBills.map((b) => {
+                                const st = billStatusBadge(b.status);
+                                return (
+                                  <tr key={b.billId}>
+                                    <td>{b.billId}</td>
+                                    <td>{b.customerName}</td>
+                                    <td>{fmtDateTime(b.orderDate)}</td>
+                                    <td>{fmtCurrency(b.totalAmount)}</td>
+                                    <td>
+                                      <span
+                                        className={`ruang-status ruang-status--${st.cls}`}
+                                      >
+                                        {st.label}
+                                      </span>
+                                    </td>
+                                  </tr>
+                                );
+                              })
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div className="ruang-card">
+                      <div className="ruang-card__title-bar">
+                        <h6>Hóa đơn doanh thu cao</h6>
+                      </div>
+                      <div className="admin-table-wrap">
+                        <table className="admin-table">
+                          <thead>
+                            <tr>
+                              <th>Mã HD</th>
+                              <th>Khách hàng</th>
+                              <th>Tổng tiền</th>
+                              <th>Trạng thái</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topRevenueBills.length === 0 ? (
+                              <tr>
+                                <td colSpan={4} className="admin-table__empty">
+                                  Chưa có dữ liệu
+                                </td>
+                              </tr>
+                            ) : (
+                              topRevenueBills.map((b) => {
+                                const st = billStatusBadge(b.status);
+                                return (
+                                  <tr key={b.billId}>
+                                    <td>{b.billId}</td>
+                                    <td>{b.customerName}</td>
+                                    <td>{fmtCurrency(b.totalAmount)}</td>
+                                    <td>
+                                      <span
+                                        className={`ruang-status ruang-status--${st.cls}`}
+                                      >
+                                        {st.label}
+                                      </span>
+                                    </td>
+                                  </tr>
+                                );
+                              })
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="ruang-bottom-grid">
+                    <div className="ruang-card">
+                      <div className="ruang-card__title-bar">
+                        <h6>Sản phẩm bán chạy</h6>
+                      </div>
+                      <div className="admin-table-wrap">
+                        <table className="admin-table">
+                          <thead>
+                            <tr>
+                              <th>Tên sản phẩm</th>
+                              <th>Đã bán</th>
+                              <th>Doanh thu</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topProducts.length === 0 ? (
+                              <tr>
+                                <td colSpan={3} className="admin-table__empty">
+                                  Chưa có dữ liệu bán
+                                </td>
+                              </tr>
+                            ) : (
+                              topProducts.map((p) => (
+                                <tr key={p.name}>
+                                  <td>{p.name}</td>
+                                  <td>{fmtNumber(p.qty)}</td>
+                                  <td>{fmtCurrency(p.revenue)}</td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+                    <div className="ruang-card">
+                      <div className="ruang-card__title-bar">
+                        <h6>Khách hàng tiêu biểu</h6>
+                      </div>
+                      <div className="admin-table-wrap">
+                        <table className="admin-table">
+                          <thead>
+                            <tr>
+                              <th>Tên</th>
+                              <th>SĐT</th>
+                              <th>Số đơn</th>
+                              <th>Tổng mua</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {topCustomers.length === 0 ? (
+                              <tr>
+                                <td colSpan={4} className="admin-table__empty">
+                                  Chưa có khách hàng
+                                </td>
+                              </tr>
+                            ) : (
+                              topCustomers.map((c) => (
+                                <tr key={c.name}>
+                                  <td>{c.name}</td>
+                                  <td>{c.phone || '—'}</td>
+                                  <td>{fmtNumber(c.orders)}</td>
+                                  <td>{fmtCurrency(c.total)}</td>
+                                </tr>
+                              ))
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
         </main>
 
-        {/* FOOTER */}
-
         <footer className="ruang-footer">
-          Copyright © GalaxyCafe
+
         </footer>
       </div>
 
-      {/* MODAL */}
-
       {logoutModalOpen && (
-        <div className="ruang-modal-backdrop">
-
+        <div className="ruang-modal-backdrop" role="dialog" aria-modal="true">
           <div className="ruang-modal">
-
             <div className="ruang-modal__header">
-              <h5>
-                Đăng xuất
-              </h5>
-
+              <h5>Đăng xuất</h5>
               <button
                 type="button"
-                onClick={() =>
-                  setLogoutModalOpen(
-                    false
-                  )
-                }
+                className="ruang-modal__close"
+                onClick={() => setLogoutModalOpen(false)}
+                aria-label="Đóng"
               >
                 ×
               </button>
             </div>
-
             <div className="ruang-modal__body">
-              Bạn có chắc muốn đăng xuất?
+              Bạn có chắc muốn đăng xuất khỏi trang quản trị?
             </div>
-
             <div className="ruang-modal__footer">
-
               <button
                 type="button"
-                onClick={() =>
-                  setLogoutModalOpen(
-                    false
-                  )
-                }
+                className="ruang-modal__btn"
+                onClick={() => setLogoutModalOpen(false)}
               >
                 Hủy
               </button>
-
               <button
                 type="button"
+                className="ruang-modal__btn ruang-modal__btn--danger"
                 onClick={logout}
               >
                 Đăng xuất
               </button>
-
             </div>
           </div>
         </div>

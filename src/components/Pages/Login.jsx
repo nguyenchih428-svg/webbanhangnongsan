@@ -58,7 +58,7 @@ const Login = () => {
       localStorage.setItem("currentUser", JSON.stringify(publicInfo));
       window.dispatchEvent(new Event("userUpdated"));
 
-      navigate(matchedAccount.role === "staff" ? "/admin" : "/");
+      navigate(matchedAccount.role === "admin" ? "/admin" : "/");
     } catch (err) {
       console.error(err);
       setError("Đã xảy ra lỗi, vui lòng thử lại sau");
