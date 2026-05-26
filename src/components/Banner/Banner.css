@@ -21,7 +21,7 @@
   width: 100%;
   height: 100%;
   opacity: 0;
-  transition: opacity 0.6s ease-in-out;
+  transition: opacity 0.25s ease-in-out;
   position: absolute;
   top: 0;
   left: 0;
@@ -60,14 +60,14 @@
   justify-content: center;
   cursor: pointer;
   z-index: 10;
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
   border-radius: 50%;
   backdrop-filter: blur(4px);
 }
 
 .banner-control:hover {
   background-color: rgba(0, 0, 0, 0.6);
-  transform: translateY(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.03);
 }
 
 .banner-control.prev {
@@ -94,7 +94,7 @@
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.15s ease;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 

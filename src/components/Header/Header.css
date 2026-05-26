@@ -39,11 +39,11 @@
 .header-logo-image {
   height: 50px;
   object-fit: contain;
-  transition: transform 0.3s ease;
+  transition: transform 0.15s ease;
 }
 
 .header-logo-image:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 
 .header-search {
@@ -418,7 +418,7 @@
   padding: 8px 0;
   opacity: 0;
   visibility: hidden;
-  transform: translateY(10px);
+  transform: translateY(4px);
   transition: all 0.2s ease;
   z-index: 1000;
   list-style: none;
@@ -438,7 +438,7 @@
 .nav-sub-link:hover {
   background: var(--color-primary-light);
   color: var(--color-primary);
-  padding-left: 25px;
+  padding-left: 22px;
 }
 
 @media (max-width: 1024px) {
@@ -522,7 +522,7 @@
     position: absolute;
     opacity: 0;
     visibility: hidden;
-    transform: translateY(10px);
+    transform: translateY(4px);
   }
 
   .nav-list-item-has-sub:hover .nav-sub {
