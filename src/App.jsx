@@ -7,6 +7,8 @@ import DetailProduct from "./components/Products/DetailProduct";
 import Cart from "./components/Products/Cart";
 import About from "./components/Pages/About";
 import News from "./components/Pages/News";
+import Login from "./components/Pages/Login";
+import Signup from "./components/Pages/Signup";
 import "./App.css";
 
 const AppContent = () => {
@@ -26,14 +28,13 @@ const AppContent = () => {
             </>
           }
         />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/product/:id" element={<DetailProduct />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/news" element={<News />} />
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Product/:id" element={<DetailProduct />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/News" element={<News />} />
 
-        {/* <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/ForgotPassword" element={<ForgotPassword />} /> */}
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Signup" element={<Signup />} />
 
         {/* <Route path="/admin" element={<Admin />} />
         <Route path="/admin/bill" element={<Admin />} />

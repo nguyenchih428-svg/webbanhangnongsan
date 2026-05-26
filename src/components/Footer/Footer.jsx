@@ -4,7 +4,6 @@ import './Footer.css';
 import logo from '../../img/logo.png';
 
 const Footer = () => {
-  /* Nhóm link điều hướng */
   const shopLinks = [
     { label: 'Nguồn gốc',   href: '/origin'  },
     { label: 'Dịch vụ',     href: '/services' },
@@ -20,8 +19,6 @@ const Footer = () => {
     { label: 'Sự kiện mới', href: '/news' },
     { label: 'Blog chia sẻ', href: '/blog' },
   ];
-
-  /* Mạng xã hội — dùng Bootstrap Icons */
   const socialLinks = [
     { icon: 'bi-facebook',  href: 'https://facebook.com',  label: 'Facebook'  },
     { icon: 'bi-instagram', href: 'https://instagram.com', label: 'Instagram' },

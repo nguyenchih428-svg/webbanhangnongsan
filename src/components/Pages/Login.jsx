@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
 
 const Login = () => {
@@ -37,7 +38,7 @@ const Login = () => {
       const normalizedUsername = trimmedUser.toLowerCase();
       const normalizedPassword = trimmedPass;
       const response = await fetch('/account.json');
-      
+
       if (!response.ok) {
         throw new Error('Không thể tải dữ liệu tài khoản');
       }

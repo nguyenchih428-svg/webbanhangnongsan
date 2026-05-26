@@ -1,10 +1,5 @@
-
-html {
-  scroll-behavior: smooth;
-}
-
 .detail-container {
-  max-width: 1200px;
+  max-width: calc(100% - 20%);
   margin: 20px auto 60px;
   padding: 0 20px;
   position: relative;

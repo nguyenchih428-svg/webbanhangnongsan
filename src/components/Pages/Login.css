@@ -1,43 +1,37 @@
-/* ============================================================
-   FILE: Login.css - Giao diện Đăng nhập & Đăng ký đồng bộ Leaf Fruit
-   ============================================================ */
-
 .login-page {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 40px 20px;
-  /* Background xanh lá nhạt theo tông màu của trang web */
   background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .login-card {
   width: 100%;
-  max-width: 400px;
+  max-width: 420px;
   background: #ffffff;
-  border-radius: 15px;
-  /* Shadow nhẹ nhàng theo phong cách hiện đại trong ảnh */
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+  padding: 40px;
   text-align: center;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #eef2f3;
 }
 
 .login-title {
-  margin: 0 0 30px;
-  font-size: 24px;
-  font-weight: 700;
-  color: #1a472a; /* Màu xanh lá đậm từ Header của bạn */
+  margin: 0 0 35px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #1a472a;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .form-group {
@@ -46,20 +40,22 @@
 
 .form-input {
   width: 100%;
-  height: 48px;
-  padding: 0 15px;
-  border-radius: 8px;
+  height: 50px;
+  padding: 0 18px;
+  border-radius: 12px;
   border: 1px solid #cbd5e1;
   font-size: 15px;
   line-height: 1.4;
   outline: none;
-  transition: all 0.3s ease;
+  transition: all 0.15s ease-out;
   box-sizing: border-box;
+  background-color: #f8fafc;
 }
 
 .form-input:focus {
-  border-color: #1a472a;
-  box-shadow: 0 0 0 3px rgba(26, 71, 42, 0.1);
+  border-color: #27ae60;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(39, 174, 96, 0.1);
 }
 
 .form-input::placeholder {
@@ -67,46 +63,66 @@
   font-size: 14px;
 }
 
-/* Nút LOGIN / ĐĂNG KÝ: Bo tròn dạng viên thuốc giống nút "Thêm vào giỏ" */
 .login-button {
-  margin-top: 10px;
+  margin-top: 15px;
   width: 100%;
-  padding: 12px 20px;
+  padding: 14px 20px;
   border: none;
-  border-radius: 25px; 
-  background-color: #1a472a; /* Màu xanh thương hiệu */
+  border-radius: 30px;
+  background-color: #1a472a;
   color: #ffffff;
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: 0.5px;
+  font-size: 16px;
+  letter-spacing: 1px;
   cursor: pointer;
   text-transform: uppercase;
-  transition: all 0.3s ease;
+  transition: all 0.15s ease-out;
 }
 
 .login-button:hover {
-  background-color: #143620; /* Xanh đậm hơn khi di chuột */
+  background-color: #27ae60;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(26, 71, 42, 0.2);
+  box-shadow: 0 4px 12px rgba(39, 174, 96, 0.25);
 }
 
 .login-button:active {
-  transform: translateY(0);
+  transform: translateY(1px);
+  box-shadow: 0 2px 6px rgba(39, 174, 96, 0.2);
 }
 
 .login-divider {
-  margin: 25px 0 15px;
+  margin: 30px 0 20px;
   font-size: 13px;
   color: #64748b;
   position: relative;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
-/* Các nút Social Login: Facebook & Google */
+.login-divider::before,
+.login-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background-color: #e2e8f0;
+}
+
+.login-divider::before {
+  left: 0;
+}
+
+.login-divider::after {
+  right: 0;
+}
+
 .social-login {
   display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
 .social-btn {
@@ -114,94 +130,101 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 10px;
-  border-radius: 8px;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
   border: 1px solid #e2e8f0;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
   background: #ffffff;
   color: #1e293b;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease-out;
 }
 
 .social-btn:hover {
-  background: #f8fafc;
+  background: #f1f5f9;
   border-color: #cbd5e1;
+  transform: translateY(-1px);
 }
 
 .social-btn.facebook i {
   color: #1877f2;
+  font-size: 18px;
 }
 
 .social-btn.google i {
   color: #ea4335;
+  font-size: 18px;
 }
 
 .login-footer {
-  margin-top: 20px;
+  margin-top: 25px;
   font-size: 14px;
   color: #64748b;
 }
 
 .login-footer--spaced {
-  margin-top: 25px;
+  margin-top: 30px;
 }
 
-/* Link Đăng ký ngay & Quên mật khẩu: Màu xanh thương hiệu */
-.signup-link, 
-.forgot-link, 
+.signup-link,
+.forgot-link,
 .link-button {
-  margin-left: 5px;
-  color: #1a472a;
-  font-weight: 600;
+  margin-left: 6px;
+  color: #27ae60;
+  font-weight: 700;
   text-decoration: none;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
+  transition: color 0.15s ease-out;
 }
 
-.signup-link:hover, 
-.forgot-link:hover, 
+.signup-link:hover,
+.forgot-link:hover,
 .link-button:hover {
+  color: #1a472a;
   text-decoration: underline;
 }
 
 .forgot-row {
   text-align: right;
-  margin-top: -8px;
+  margin-top: -10px;
   margin-bottom: 5px;
 }
 
-/* Thông báo lỗi & Thành công */
 .login-error {
-  font-size: 13px;
+  font-size: 14px;
   color: #ef4444;
   background-color: #fef2f2;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
   text-align: left;
-  border-left: 3px solid #ef4444;
+  border-left: 4px solid #ef4444;
+  font-weight: 500;
 }
 
 .login-success {
-  font-size: 13px;
+  font-size: 14px;
   color: #16a34a;
   background-color: #f0fdf4;
-  padding: 8px;
-  border-radius: 6px;
+  padding: 12px;
+  border-radius: 8px;
   text-align: left;
-  border-left: 3px solid #16a34a;
+  border-left: 4px solid #16a34a;
+  font-weight: 500;
 }
 
-/* Responsive cho điện thoại */
 @media (max-width: 480px) {
   .login-card {
-    padding: 30px 20px;
+    padding: 35px 25px;
   }
   .login-title {
-    font-size: 20px;
+    font-size: 22px;
+  }
+  .social-login {
+    flex-direction: column;
   }
 }
