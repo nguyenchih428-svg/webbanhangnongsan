@@ -15,8 +15,8 @@
 }
 
 .header-top-bar {
-  background: #f0fdf4;
-  border-bottom: 1px solid #e2f0e6;
+  background: #ffffff;
+  border-bottom: 1px solid #eaeaea;
   padding: 10px 0;
 }
 
@@ -155,7 +155,7 @@
   width: 40px;
   height: 40px;
   object-fit: contain;
-  background: #f8faff;
+  background: #ffffff;
   border-radius: 6px;
   flex-shrink: 0;
 }

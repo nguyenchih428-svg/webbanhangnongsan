@@ -10,7 +10,7 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % banners.length);
-    }, 10000); // Chuyển đổi mỗi 10 giây
+    }, 10000);
     return () => clearInterval(interval);
   }, [banners.length]);
 
@@ -31,7 +31,7 @@ const Banner = () => {
         ))}
       </div>
 
-      {/* Dots indicator (optional) */}
+
       <div className="banner-dots">
         {banners.map((_, index) => (
           <span
