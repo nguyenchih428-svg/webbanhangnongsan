@@ -16,7 +16,7 @@
       },
       {
         "productId": 5,
-        "productName": "Thanh Long Bình Thuận",
+        "productName": "Thanh Long ",
         "selectedSize": "L",
         "quantity": 1,
         "unitPrice": 35000,
@@ -252,7 +252,7 @@
     "items": [
       {
         "productId": 5,
-        "productName": "Thanh Long Bình Thuận",
+        "productName": "Thanh Long ",
         "selectedSize": "S",
         "quantity": 5,
         "unitPrice": 35000,
@@ -444,7 +444,7 @@
       },
       {
         "productId": 5,
-        "productName": "Thanh Long Bình Thuận",
+        "productName": "Thanh Long ",
         "selectedSize": "M",
         "quantity": 3,
         "unitPrice": 35000,
