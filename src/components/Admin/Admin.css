@@ -186,7 +186,7 @@
   height: 2.75rem;
   border: none;
   border-radius: 8px;
-  background: var(--color-primary-light);
+  background: #f0fdf4;
   color: #334155;
   cursor: pointer;
   align-items: center;
@@ -261,7 +261,7 @@
 .ruang-stat-card {
   background: #fff;
   border-radius: 10px;
-  border-left: 4px solid var(--color-primary);
+  border-left: 4px solid #15803d;
   box-shadow: 0 2px 12px rgba(21, 128, 61, 0.04);
   padding: 1.1rem 1.25rem;
   display: flex;
@@ -321,7 +321,7 @@
   justify-content: center;
   font-size: 1.65rem;
   background: rgba(21, 128, 61, 0.08);
-  color: var(--color-primary);
+  color: #15803d;
 }
 
 .ruang-card {
@@ -392,7 +392,7 @@
   font-weight: 700;
   border-radius: 8px;
   border: none;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(180deg, #15803d 0%, #166534 100%);
   color: #fff;
   cursor: pointer;
   box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3);
@@ -410,7 +410,7 @@
 }
 
 .admin-btn--ghost {
-  background: var(--color-primary-light);
+  background: #f0fdf4;
   color: #0f172a;
   box-shadow: none;
 }
@@ -479,7 +479,7 @@
 .admin-form-grid input:focus,
 .admin-form-grid select:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: #15803d;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
 }
 
@@ -565,7 +565,7 @@
 
 .admin-invoice-card-total {
   font-weight: 800;
-  color: var(--color-primary);
+  color: #15803d;
   font-size: 0.9rem;
 }
 
@@ -640,7 +640,7 @@
 }
 
 .ruang-footer a {
-  color: var(--color-primary);
+  color: #15803d;
   font-weight: 700;
   text-decoration: none;
 }
@@ -680,21 +680,21 @@
 }
 
 .ruang-revenue-item-head strong {
-  color: var(--color-primary);
+  color: #15803d;
   white-space: nowrap;
 }
 
 .ruang-revenue-item-bar {
   height: 0.58rem;
   border-radius: 999px;
-  background: var(--color-primary-light);
+  background: #f0fdf4;
   overflow: hidden;
 }
 
 .ruang-revenue-item-fill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, var(--color-primary), #20c997);
+  background: linear-gradient(90deg, #15803d, #20c997);
 }
 
 .ruang-sold-list {
@@ -722,7 +722,7 @@
 .ruang-sold-item-bar {
   height: 0.58rem;
   border-radius: 999px;
-  background: var(--color-primary-light);
+  background: #f0fdf4;
   overflow: hidden;
 }
 
@@ -732,7 +732,7 @@
 }
 
 .ruang-sold-item-fill--0 {
-  background: var(--color-primary);
+  background: #15803d;
 }
 
 .ruang-sold-item-fill--1 {
@@ -762,7 +762,7 @@
 
 .ruang-mini-btn {
   border: none;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(180deg, #15803d 0%, #166534 100%);
   color: #fff;
   border-radius: 6px;
   padding: 0.5rem 0.7rem;
@@ -783,7 +783,7 @@
 }
 
 .ruang-status--done {
-  background: var(--color-primary);
+  background: #15803d;
 }
 
 .ruang-status--shipping {
@@ -810,16 +810,16 @@
   font-size: 0.78rem;
   font-weight: 700;
   padding: 0.45rem 0.7rem;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(180deg, #15803d 0%, #166534 100%);
   cursor: pointer;
 }
 
 .ruang-vip-title {
   padding: 1rem 1.25rem;
-  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  background: linear-gradient(180deg, #15803d 0%, #166534 100%);
   color: #fff;
   font-weight: 800;
-  border-bottom: 1px solid var(--color-primary-dark);
+  border-bottom: 1px solid #166534;
 }
 
 .ruang-vip-list {
@@ -904,7 +904,7 @@
 
 .admin-toolbar-search input:focus {
   outline: none;
-  border-color: var(--color-primary);
+  border-color: #15803d;
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
@@ -927,12 +927,12 @@
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  background: var(--color-primary);
+  background: #15803d;
   color: #fff;
 }
 
 .admin-table-link:hover:not(:disabled) {
-  background: var(--color-primary-dark);
+  background: #166534;
 }
 
 .admin-table-link:disabled {
@@ -970,7 +970,7 @@
   height: 2.625rem;
   border-radius: 50%;
   border: none;
-  background: var(--color-primary-light);
+  background: #f0fdf4;
   color: #64748b;
   cursor: pointer;
   display: inline-flex;
@@ -983,7 +983,7 @@
 
 .ruang-notify:hover {
   background: #d8efdd;
-  color: var(--color-primary);
+  color: #15803d;
 }
 
 .ruang-notify i {
@@ -1032,7 +1032,7 @@
   width: 2.25rem;
   height: 2.25rem;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-primary), #20c997);
+  background: linear-gradient(135deg, #15803d, #20c997);
   color: #fff;
   font-weight: 800;
   font-size: 0.75rem;
@@ -1122,7 +1122,7 @@
   flex-wrap: wrap;
   gap: 12px;
   padding: 14px 24px;
-  background: var(--color-primary);
+  background: #15803d;
   color: #fff;
 }
 
@@ -1156,7 +1156,7 @@
 .admin-topbar-btn--primary {
   background: #fff;
   border-color: #fff;
-  color: var(--color-primary);
+  color: #15803d;
 }
 
 .admin-body {
@@ -1205,7 +1205,7 @@
   height: 2rem;
   border: none;
   border-radius: 50%;
-  background: var(--color-primary-light);
+  background: #f0fdf4;
   color: #64748b;
   cursor: pointer;
 }

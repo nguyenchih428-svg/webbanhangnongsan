@@ -13,7 +13,7 @@
 .pc:hover {
   box-shadow: 0 12px 28px rgba(21, 128, 61, 0.12);
   transform: translateY(-1px);
-  border-color: var(--color-primary);
+  border-color: #15803d;
 }
 
 .pc-badge {
@@ -133,7 +133,7 @@
 }
 
 .pc-rating i {
-  color: var(--color-accent);
+  color: #eab308;
   font-size: 12px;
 }
 
@@ -144,7 +144,7 @@
 
 .pc-btn-buy {
   flex: 1;
-  background: var(--color-primary);
+  background: #15803d;
   color: #ffffff;
   border: none;
   border-radius: 10px;
@@ -156,7 +156,7 @@
 }
 
 .pc-btn-buy:hover {
-  background: var(--color-primary-dark);
+  background: #166534;
   transform: translateY(-1px);
 }
 
@@ -173,9 +173,9 @@
 .pc-btn-cart {
   width: 44px;
   height: 44px;
-  background: var(--color-primary-light);
-  color: var(--color-primary);
-  border: 1.5px solid var(--color-primary);
+  background: #f0fdf4;
+  color: #15803d;
+  border: 1.5px solid #15803d;
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -187,7 +187,7 @@
 }
 
 .pc-btn-cart:hover {
-  background: var(--color-primary);
+  background: #15803d;
   color: #ffffff;
   transform: translateY(-1px);
 }
